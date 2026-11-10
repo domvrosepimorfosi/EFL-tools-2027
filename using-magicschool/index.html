@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" data-bdd-module="using-magicschool">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MagicSchool AI — Comprehensive Teacher Guide</title>
+  <!-- Jazzy fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #fff7fa;
+      --ink:#18202b;
+      --muted:#5a6572;
+      --chip:#ffe27a;
+      --accent:#ff6bb5;
+      /* section colors */
+      --c1: linear-gradient(135deg,#ff6b6b,#ffd93d);
+      --c2: linear-gradient(135deg,#6a82fb,#fc5c7d);
+      --c3: linear-gradient(135deg,#00c6ff,#0072ff);
+      --c4: linear-gradient(135deg,#43e97b,#38f9d7);
+      --c5: linear-gradient(135deg,#f83600,#f9d423);
+      --c6: linear-gradient(135deg,#b721ff,#21d4fd);
+      --c7: linear-gradient(135deg,#ff9a9e,#fecfef);
+    }
+    html,body{height:100%}
+    body{ margin:0; background:var(--bg); color:var(--ink);
+      font-family:"Quicksand", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; line-height:1.55; }
+
+    header{ position:sticky; top:0; z-index:10; backdrop-filter:saturate(1.4) blur(6px);
+      background:rgba(255,255,255,.85); border-bottom:1px dashed #e5e5ee; }
+    .wrap{max-width:1100px; margin:0 auto; padding:14px 20px}
+    .top{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:14px; }
+    .logo{ width:64px; height:64px; object-fit:contain; border-radius:50%; box-shadow:0 6px 14px rgba(0,0,0,.15); align-self:center; justify-self:start }
+    h1{ font-family:"Fugaz One", cursive; letter-spacing:.5px; margin:6px 0 4px; font-size:clamp(1.4rem,2.6vw,2.3rem); }
+    .sub{color:var(--muted); font-size:.96rem; margin:0 0 10px}
+
+    .toolbar{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+    .search{ display:flex; align-items:center; gap:8px; flex:1 1 320px; background:#fff; border:2px solid #ffd0e0; padding:8px 10px; border-radius:14px; box-shadow:0 6px 14px rgba(255,105,180,.12);} 
+    .search input{ border:none; outline:none; width:100%; font-size:1rem; background:transparent }
+    .btns{display:flex; gap:8px; flex-wrap:wrap}
+    button{ border:none; cursor:pointer; border-radius:12px; padding:9px 14px; font-weight:700; background:#ffe27a; box-shadow:0 6px 14px rgba(0,0,0,.08); transition:transform .08s ease; }
+    button:hover{ transform:translateY(-1px) }
+    nav{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
+    .chip{ font-weight:800; font-size:.9rem; padding:8px 12px; border-radius:999px; background:var(--chip); text-decoration:none; color:#222; border:2px solid #fff0a6; box-shadow:0 6px 12px rgba(255,199,0,.25); }
+
+    main{ max-width:1100px; margin:20px auto 70px; padding:0 20px }
+    section{ margin:20px 0 }
+    section > details{ border-radius:18px; overflow:hidden; background:#fff; border:2px solid #ffe3ef; box-shadow:0 10px 24px rgba(255,105,180,.14);} 
+    summary.section-head{ list-style:none; cursor:pointer; padding:16px 18px; display:flex; align-items:center; gap:12px; color:#fff; font-family:"Fugaz One", cursive; letter-spacing:.4px; font-size:1.12rem; text-shadow:0 2px 8px rgba(0,0,0,.15) }
+    summary.section-head::-webkit-details-marker{display:none}
+    .icon{font-size:1.3rem}
+    .count{ margin-left:auto; font-weight:800; background:rgba(255,255,255,.22); padding:6px 10px; border-radius:999px }
+    .inner{ padding:14px 16px 18px; background:linear-gradient(180deg, #ffffff 0%, #fff7fb 100%) }
+
+    .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px }
+    details.card{ border:2px solid #ffe1f1; border-radius:16px; overflow:hidden; background:#fff; box-shadow:0 8px 18px rgba(255,105,180,.12);} 
+    summary.card-head{ list-style:none; cursor:pointer; padding:12px 14px; font-weight:800; display:flex; align-items:center; gap:8px; background:linear-gradient(135deg,#fff1f7,#fffdf2);} 
+    summary.card-head::-webkit-details-marker{display:none}
+    .tag{ font-size:.78rem; padding:4px 8px; border-radius:8px; font-weight:800; background:#e6f7ff; color:#095778; border:1px solid #c7ebff }
+    .body{ padding:10px 14px 14px; color:#2a3442 }
+    .body p{ margin:0 0 10px }
+    .body ul{ margin:0 0 10px 18px }
+    code, pre{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace }
+    pre{ background:#fff9fe; border:1px dashed #ffcef0; padding:10px; border-radius:10px; overflow:auto }
+    .copy{ margin-left:auto; font-size:.8rem; padding:6px 10px; background:#ffd7fb }
+
+    /* Section color bands */
+    .c1 summary.section-head{background:var(--c1)}
+    .c2 summary.section-head{background:var(--c2)}
+    .c3 summary.section-head{background:var(--c3)}
+    .c4 summary.section-head{background:var(--c4)}
+    .c5 summary.section-head{background:var(--c5)}
+    .c6 summary.section-head{background:var(--c6)}
+    .c7 summary.section-head{background:var(--c7)}
+
+    .no-results{display:none; margin:14px 0 0; font-weight:800; color:#a3003b}
+    footer{ max-width:1100px; margin:40px auto 60px; padding:0 20px; color:var(--muted); font-size:.92rem; text-align:center }
+    .small{font-size:.86rem}
+  </style>
+<link rel="stylesheet" href="bdd-module-theme.css">
+</head>
+<body>
+<div class="library-banner" role="region" aria-label="Digital Teaching Library identity">
+  <div class="library-banner-inner">
+    <div class="library-eyebrow">Digital Teaching Library</div>
+    <div class="library-full-title">Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</div>
+  </div>
+</div>
+  <header>
+    <div class="wrap">
+      <div class="top">
+        <img src="../assets/pdhub-logo.png" class="logo" alt="Panagiotis Domvros EFL Hub logo" />
+        <div>
+          <h1>MagicSchool AI — Comprehensive Teacher Guide</h1>
+          
+        </div>
+      </div>
+      <div class="toolbar">
+        <label class="search" aria-label="Search the guide">
+          <span>🔎</span>
+          <input id="q" type="search" placeholder="Filter by keyword (e.g., rubric, differentiation, ELL, email, Padlet, Greek)…" />
+        </label>
+        <div class="btns">
+          <button id="expandAll" title="Expand all sections">⤢ Expand All</button>
+          <button id="collapseAll" title="Collapse all sections">⤡ Collapse All</button>
+          <button id="reset" title="Clear search and reset view">↺ Reset</button>
+        </div>
+      </div>
+      <nav aria-label="Jump to section">
+        <a class="chip" href="#start">🚀 Start Here</a>
+        <a class="chip" href="#plan">🗺️ Plan</a>
+        <a class="chip" href="#teach">📚 Teach</a>
+        <a class="chip" href="#assess">🧪 Assess</a>
+        <a class="chip" href="#communicate">✉️ Communicate</a>
+        <a class="chip" href="#prompts">✨ Prompts</a>
+        <a class="chip" href="#safety">🛡️ Safety</a>
+        <a class="chip" href="#faq">❓ FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- START HERE -->
+    <section id="start">
+      <details open class="c1">
+        <summary class="section-head"><span class="icon">🚀</span> START HERE <span class="count" data-count="start">6</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="start">
+            <details class="card">
+              <summary class="card-head">What Is MagicSchool AI? <span class="tag">Overview</span></summary>
+              <div class="body">
+                <p>MagicSchool AI is a collection of educator‑focused AI tools that help you plan, differentiate, create resources, and communicate more efficiently. Think of it as a co‑planner that drafts first passes so you can refine with your expertise.</p>
+                <ul>
+                  <li>Best for: drafting lesson materials, differentiating texts, brainstorming activities, generating rubrics, feedback, and emails.</li>
+                  <li>Not for: grading high‑stakes work automatically, replacing teacher judgment, or handling student personal data.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Workflow at a Glance <span class="tag">Big Picture</span></summary>
+              <div class="body">
+                <ol>
+                  <li><strong>Plan:</strong> unit goals → lesson outline → materials &amp; differentiation.</li>
+                  <li><strong>Teach:</strong> slides, discussion questions, station tasks, exemplars.</li>
+                  <li><strong>Assess:</strong> quick checks, rubrics, feedback comments, retake versions.</li>
+                  <li><strong>Communicate:</strong> family emails, progress reports, student reflections.</li>
+                </ol>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Inputs That Get Better Outputs <span class="tag">Prompting</span></summary>
+              <div class="body">
+                <p>Give <em>context</em> (grade, subject, standards), <em>constraints</em> (time, language, tone), and <em>examples</em> (your rubric or a student sample). Use the templates in the <a href="#prompts">Prompts</a> section.</p>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">File Types &amp; Formats <span class="tag">Resources</span></summary>
+              <div class="body">
+                <ul>
+                  <li>Paste text or upload materials (if available in your plan). Use short excerpts for long texts.</li>
+                  <li>When differentiating, specify target CEFR/reading level (e.g., B1 or Grade 6 readability) and vocabulary limits.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Time‑Saver Mindset <span class="tag">Teaching Load</span></summary>
+              <div class="body"><p>Use MagicSchool for <strong>first drafts</strong> of repetitive tasks. Spend your time on feedback, relationships, and tailoring to your class in Greece’s school context (e.g., phone‑ban, bilingual needs).</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Accessibility &amp; Language <span class="tag">ELL</span></summary>
+              <div class="body"><p>Ask for bilingual outputs (EN/EL) and plain‑language versions. Include audio or step‑by‑step formats to support diverse learners.</p></div>
+            </details>
+          </div>
+          <p class="no-results">No matching items here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- PLAN -->
+    <section id="plan">
+      <details class="c2">
+        <summary class="section-head"><span class="icon">🗺️</span> PLAN — Curriculum, Units, Lessons <span class="count" data-count="plan">7</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="plan">
+            <details class="card">
+              <summary class="card-head">Unit Backwards Design <span class="tag">Planning</span></summary>
+              <div class="body">
+                <p>Describe desired outcomes and assessments; have MagicSchool propose a sequence of lessons with essential questions.</p>
+                <button class="copy" data-copy="ROLE: Curriculum designer\nTASK: Backwards design a 4‑week unit on [topic] for grade [X].\nCONTEXT: Greek lower secondary; mixed proficiency; phone use banned in class.\nCONSTRAINTS: 3 lessons/week, 45’ each; include standards/skills, essential questions, formative checks, SEL notes.\nOUTPUT: Table with week→lessons, objectives, activities, materials.">Copy prompt</button>
+                <pre>ROLE: Curriculum designer
+TASK: Backwards design a 4‑week unit on [topic] for grade [X].
+CONTEXT: Greek lower secondary; mixed proficiency; phone use banned in class.
+CONSTRAINTS: 3 lessons/week, 45’ each; include standards/skills, essential questions, formative checks, SEL notes.
+OUTPUT: Table with week→lessons, objectives, activities, materials.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Daily Lesson Builder <span class="tag">Lesson Plan</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Create a 45‑minute lesson on [learning target]. Include: hook (5’), mini‑lesson (10’), guided practice (10’), stations or pair task (15’), exit ticket (5’). Materials, differentiation for B1/B2 levels, and a homework option.">Copy prompt</button>
+                <pre>Create a 45‑minute lesson on [learning target]. Include: hook (5’), mini‑lesson (10’), guided practice (10’), stations or pair task (15’), exit ticket (5’). Materials, differentiation for B1/B2 levels, and a homework option.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Differentiate a Text <span class="tag">Reading Levels</span></summary>
+              <div class="body">
+                <p>Paste a passage and ask for three levels with glossed vocabulary and comprehension questions.</p>
+                <button class="copy" data-copy="Simplify the following to CEFR A2, B1, and B2 versions. Add a 6‑item quiz (MCQ + 2 short answer) for each level and a vocabulary box with Greek translations.">Copy prompt</button>
+                <pre>Simplify the following to CEFR A2, B1, and B2 versions. Add a 6‑item quiz (MCQ + 2 short answer) for each level and a vocabulary box with Greek translations.
+
+[PASTE TEXT]</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Graphic Organizers &amp; Station Rotations <span class="tag">Templates</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Generate 3 station tasks for [topic]: (1) read/annotate, (2) discuss/organize, (3) create/apply. Provide printable graphic organizer prompts for each.">Copy prompt</button>
+                <pre>Generate 3 station tasks for [topic]: (1) read/annotate, (2) discuss/organize, (3) create/apply. Provide printable graphic organizer prompts for each.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Vocabulary Sets &amp; Routines <span class="tag">EFL</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="For the text below, create a tiered vocabulary set (core/academic/extension) with IPA, part of speech, example sentences, collocations, and Greek glosses. Add 3 daily 5‑minute routines.">Copy prompt</button>
+                <pre>For the text below, create a tiered vocabulary set (core/academic/extension) with IPA, part of speech, example sentences, collocations, and Greek glosses. Add 3 daily 5‑minute routines.
+
+[PASTE TEXT]</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Slide Outline &amp; Visuals <span class="tag">Slides</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Outline 8 slides for [lesson objective]. Include title, visuals to search for, teacher talk time tips, and 2 interactive moments (poll, pair‑share).">Copy prompt</button>
+                <pre>Outline 8 slides for [lesson objective]. Include title, visuals to search for, teacher talk time tips, and 2 interactive moments (poll, pair‑share).</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Reading/Listening Comprehension Sets <span class="tag">Assessment‑Ready</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Based on [topic], create a 250‑word reading at B1 and 8 questions (4 MCQ, 2 short answer, 2 vocab‑in‑context). Provide an answer key and a parallel A2 version for support.">Copy prompt</button>
+                <pre>Based on [topic], create a 250‑word reading at B1 and 8 questions (4 MCQ, 2 short answer, 2 vocab‑in‑context). Provide an answer key and a parallel A2 version for support.</pre>
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching items here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- TEACH -->
+    <section id="teach">
+      <details class="c3">
+        <summary class="section-head"><span class="icon">📚</span> TEACH — In‑Class Supports &amp; Activities <span class="count" data-count="teach">7</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="teach">
+            <details class="card">
+              <summary class="card-head">Discussion Questions by Depth <span class="tag">DOK/IB‑style</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Create 3 levels of discussion questions (surface, deep, transfer) for [text/topic]. Provide follow‑ups and sentence stems for ELLs.">Copy prompt</button>
+                <pre>Create 3 levels of discussion questions (surface, deep, transfer) for [text/topic]. Provide follow‑ups and sentence stems for ELLs.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Model Answers &amp; Think‑Alouds <span class="tag">Exemplars</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Write a model paragraph responding to [prompt] at B2 level and annotate it with a teacher think‑aloud explaining choices (organization, vocabulary, transitions).">Copy prompt</button>
+                <pre>Write a model paragraph responding to [prompt] at B2 level and annotate it with a teacher think‑aloud explaining choices (organization, vocabulary, transitions).</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Speaking Frames &amp; Role‑Plays <span class="tag">Oracy</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Design a pair role‑play for [situation]. Include target functions, graded speaking frames (A2→B2), and success criteria.">Copy prompt</button>
+                <pre>Design a pair role‑play for [situation]. Include target functions, graded speaking frames (A2→B2), and success criteria.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Choice Boards &amp; Menus <span class="tag">UDL</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Create a 3×3 choice board for [topic] with creation tasks at low/medium/high complexity, including one offline task (no devices).">Copy prompt</button>
+                <pre>Create a 3×3 choice board for [topic] with creation tasks at low/medium/high complexity, including one offline task (no devices).</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Real‑Time Scaffolds <span class="tag">Supports</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Provide sentence starters and tiered hints for students who are stuck on [task]. Include a mini‑glossary with Greek translations.">Copy prompt</button>
+                <pre>Provide sentence starters and tiered hints for students who are stuck on [task]. Include a mini‑glossary with Greek translations.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Non‑Digital Alternatives <span class="tag">Phone Ban</span></summary>
+              <div class="body">
+                <p>Ask for paper‑first options that replicate a digital task (gallery walk, card sort, timeline, stand‑up survey) so lessons stay device‑light.</p>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Quick SEL Integrations <span class="tag">Wellbeing</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Suggest two 3‑minute SEL check‑ins tied to [lesson objective], appropriate for Greek lower secondary. Provide silent and talk options.">Copy prompt</button>
+                <pre>Suggest two 3‑minute SEL check‑ins tied to [lesson objective], appropriate for Greek lower secondary. Provide silent and talk options.</pre>
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching items here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ASSESS -->
+    <section id="assess">
+      <details class="c4">
+        <summary class="section-head"><span class="icon">🧪</span> ASSESS — Checks, Rubrics, Feedback <span class="count" data-count="assess">7</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="assess">
+            <details class="card">
+              <summary class="card-head">Design a Rubric <span class="tag">Criteria</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Create a 4‑level analytic rubric for [task], criteria: Ideas, Organization, Language Control, Academic Vocabulary, Conventions. Add student‑friendly descriptors.">Copy prompt</button>
+                <pre>Create a 4‑level analytic rubric for [task], criteria: Ideas, Organization, Language Control, Academic Vocabulary, Conventions. Add student‑friendly descriptors.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Generate Varied Question Types <span class="tag">Item Bank</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="From the passage below, create: 4 MCQs (plausible distractors), 2 short‑answer, 1 inference, 1 vocabulary‑in‑context, and an answer key.">Copy prompt</button>
+                <pre>From the passage below, create: 4 MCQs (plausible distractors), 2 short‑answer, 1 inference, 1 vocabulary‑in‑context, and an answer key.
+
+[PASTE PASSAGE]</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Feedback Comment Bank <span class="tag">Fast Marking</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Create a bank of 25 feedback comments for [skill], grouped by strength and next step. Keep each comment under 25 words.">Copy prompt</button>
+                <pre>Create a bank of 25 feedback comments for [skill], grouped by strength and next step. Keep each comment under 25 words.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Retake/Revision Versions <span class="tag">Mastery</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Create an alternate version of this quiz at the same difficulty, with new items measuring the same standards. Include answer key.">Copy prompt</button>
+                <pre>Create an alternate version of this quiz at the same difficulty, with new items measuring the same standards. Include answer key.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Self &amp; Peer Assessment <span class="tag">Metacognition</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Provide a self/peer checklist for [assignment] aligned to the rubric. Include sentence frames for peer feedback.">Copy prompt</button>
+                <pre>Provide a self/peer checklist for [assignment] aligned to the rubric. Include sentence frames for peer feedback.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Plagiarism‑Aware Red Teaming <span class="tag">Academic Integrity</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Scan the assignment prompt for vulnerabilities to AI misuse. Suggest adjustments and an authentic performance task to reduce copy‑paste risk.">Copy prompt</button>
+                <pre>Scan the assignment prompt for vulnerabilities to AI misuse. Suggest adjustments and an authentic performance task to reduce copy‑paste risk.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Progress Tracking Templates <span class="tag">Reports</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Draft a 6‑week progress tracker for [class], focusing on reading fluency and vocabulary growth. Include weekly targets and reflection prompts.">Copy prompt</button>
+                <pre>Draft a 6‑week progress tracker for [class], focusing on reading fluency and vocabulary growth. Include weekly targets and reflection prompts.</pre>
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching items here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- COMMUNICATE -->
+    <section id="communicate">
+      <details class="c5">
+        <summary class="section-head"><span class="icon">✉️</span> COMMUNICATE — Families &amp; Students <span class="count" data-count="communicate">6</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="communicate">
+            <details class="card">
+              <summary class="card-head">Family Email Drafts <span class="tag">Home‑School</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Draft a positive update email to [family/guardian] about [student first name], including one success this week, one focus for next week, and one way to help at home. Tone: warm, professional. EN + EL.">Copy prompt</button>
+                <pre>Draft a positive update email to [family/guardian] about [student first name], including one success this week, one focus for next week, and one way to help at home. Tone: warm, professional. EN + EL.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Behavior Narratives <span class="tag">Supportive</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Write a brief incident summary using neutral language and next steps for support, aligned with school policy. Provide EN + EL versions.">Copy prompt</button>
+                <pre>Write a brief incident summary using neutral language and next steps for support, aligned with school policy. Provide EN + EL versions.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Student Reflection Prompts <span class="tag">Metacognition</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Create 10 reflection prompts for [unit], 5 quick‑write and 5 discussion, with B1 language scaffolds.">Copy prompt</button>
+                <pre>Create 10 reflection prompts for [unit], 5 quick‑write and 5 discussion, with B1 language scaffolds.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Newsletter Blurbs <span class="tag">Stakeholders</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Write a 120‑word newsletter blurb about [project/event] highlighting learning goals and how families can engage. EN + EL.">Copy prompt</button>
+                <pre>Write a 120‑word newsletter blurb about [project/event] highlighting learning goals and how families can engage. EN + EL.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">IEP/Support Strategy Suggestions <span class="tag">Inclusion</span></summary>
+              <div class="body">
+                <p>When appropriate and without sharing personal data, ask for strategy menus tied to learner needs (attention, working memory, language processing) and device‑light options.</p>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Rubric‑Aligned Student‑Friendly Language <span class="tag">Transparency</span></summary>
+              <div class="body">
+                <button class="copy" data-copy="Rewrite this rubric in student‑friendly language (B1), add examples of ‘meets’ vs ‘exceeds’, and a one‑page checklist.">Copy prompt</button>
+                <pre>Rewrite this rubric in student‑friendly language (B1), add examples of ‘meets’ vs ‘exceeds’, and a one‑page checklist.</pre>
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching items here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- PROMPTS -->
+    <section id="prompts">
+      <details class="c6">
+        <summary class="section-head"><span class="icon">✨</span> PROMPTS — Patterns, Templates, Examples <span class="count" data-count="prompts">6</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="prompts">
+            <details class="card">
+              <summary class="card-head">5‑Part Prompt Formula <span class="tag">Pattern</span></summary>
+              <div class="body">
+                <pre>ROLE + TASK + CONTEXT + CONSTRAINTS + OUTPUT
+Example:
+ROLE: EFL curriculum coach
+TASK: Draft a mini‑lesson on phrasal verbs with "get"
+CONTEXT: Greek junior high, mixed A2–B1
+CONSTRAINTS: 45’, phone‑ban, include speaking frame
+OUTPUT: numbered lesson steps + printable handout</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Rubric→Feedback Generator <span class="tag">Workflow</span></summary>
+              <div class="body">
+                <pre>Given this rubric and student paragraph, produce 3 strengths + 2 next steps + 1 target for revision. Keep under 120 words. Use warm tone.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Text Simplifier with Glossary <span class="tag">EFL</span></summary>
+              <div class="body">
+                <pre>Rewrite at B1 level (short sentences). Add a 10‑item glossary (EN→EL) and 5 comprehension questions.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Academic Integrity Guardrails <span class="tag">Policy</span></summary>
+              <div class="body">
+                <pre>Review this assignment for AI‑misuse risks and suggest authentic alternatives requiring personal voice, local examples, or process evidence.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Parent Communication Templates <span class="tag">Bilingual</span></summary>
+              <div class="body">
+                <pre>Write a brief message to families about [topic], include EN and EL versions, warm tone, and 1 suggestion for supporting learning at home.</pre>
+              </div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Prompt Debugger <span class="tag">Improve</span></summary>
+              <div class="body">
+                <pre>Analyze this failed prompt. Identify missing context/constraints and propose a revised version that is likely to succeed.</pre>
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching items here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- SAFETY & PRIVACY -->
+    <section id="safety">
+      <details class="c7">
+        <summary class="section-head"><span class="icon">🛡️</span> SAFETY, PRIVACY &amp; GOOD PRACTICE <span class="count" data-count="safety">6</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="safety">
+            <details class="card">
+              <summary class="card-head">No Student PII <span class="tag">Privacy</span></summary>
+              <div class="body"><p>Don’t enter full names, IDs, contact details, or sensitive info. Use initials or anonymized samples when modeling work.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Human‑in‑the‑Loop <span class="tag">Professional Judgment</span></summary>
+              <div class="body"><p>Treat outputs as drafts. Edit for local curriculum, cultural nuances, and appropriateness. Verify facts and answer keys.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Bias &amp; Representation Checks <span class="tag">Equity</span></summary>
+              <div class="body"><p>Ask explicitly for diverse names, examples, and perspectives. Review for stereotypes and adjust accordingly.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Device‑Light Options <span class="tag">Greece Policy</span></summary>
+              <div class="body"><p>Request printable handouts and paper‑first workflows to align with the mobile phone ban in Greek schools.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Citations &amp; Sources <span class="tag">Transparency</span></summary>
+              <div class="body"><p>When content draws on sources, ask MagicSchool to include citations or links and to flag uncertain claims.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Accessibility &amp; UDL <span class="tag">Inclusive</span></summary>
+              <div class="body"><p>Request alt text for images, dyslexia‑friendly versions, low‑reading alternatives, and audio scripts.</p></div>
+            </details>
+          </div>
+          <p class="no-results">No matching items here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <details class="c2">
+        <summary class="section-head"><span class="icon">❓</span> FAQ &amp; TROUBLESHOOTING <span class="count" data-count="faq">5</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="faq">
+            <details class="card">
+              <summary class="card-head">It’s too generic. <span class="tag">Quality</span></summary>
+              <div class="body"><p>Add your exact objective, time, class profile, and an example of what good looks like. See the 5‑part prompt formula.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">It hallucinated a fact. <span class="tag">Accuracy</span></summary>
+              <div class="body"><p>Ask for sources and verification steps. Provide your own text as the single source to reduce drift.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Tone is off. <span class="tag">Voice</span></summary>
+              <div class="body"><p>Specify: “warm but professional,” “student‑friendly B1,” or “formal memo.” Paste a sample paragraph to imitate.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">Output is too long. <span class="tag">Constraints</span></summary>
+              <div class="body"><p>Set word/time limits, ask for bullet points, and request a printable one‑pager version.</p></div>
+            </details>
+            <details class="card">
+              <summary class="card-head">I need it bilingual. <span class="tag">EN/EL</span></summary>
+              <div class="body"><p>Ask for parallel English/Greek outputs and include a glossary box (EN→EL) for key terms.</p></div>
+            </details>
+          </div>
+          <p class="no-results">No matching items here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p class="small">✨✍️ Created by Panagiotis Domvros, English and Drama Teacher, All Rights Reserved ✍️✨</p>
+  </footer>
+
+  <script>
+    const q = document.getElementById('q');
+    const resetBtn = document.getElementById('reset');
+    const expandAll = document.getElementById('expandAll');
+    const collapseAll = document.getElementById('collapseAll');
+
+    const sectionDetails = Array.from(document.querySelectorAll('section > details'));
+    const cardDetails = Array.from(document.querySelectorAll('details.card'));
+
+    function setCounts(){
+      const groups = ['start','plan','teach','assess','communicate','prompts','safety','faq'];
+      groups.forEach(g=>{
+        const grid = document.querySelector(`[data-group="${g}"]`);
+        if(!grid) return;
+        const visible = Array.from(grid.querySelectorAll('details.card')).filter(el=>el.style.display !== 'none').length;
+        const badge = document.querySelector(`[data-count="${g}"]`);
+        if(badge) badge.textContent = visible;
+        const empty = grid.parentElement.querySelector('.no-results');
+        if(empty) empty.style.display = visible ? 'none' : 'block';
+      });
+    }
+
+    function filterItems(term){
+      const t = term.trim().toLowerCase();
+      if(t){ sectionDetails.forEach(d=> d.open = true); }
+      cardDetails.forEach(d=>{
+        const txt = d.textContent.toLowerCase();
+        d.style.display = txt.includes(t) ? '' : 'none';
+      });
+      setCounts();
+    }
+
+    q.addEventListener('input', e=> filterItems(e.target.value));
+
+    resetBtn.addEventListener('click', ()=>{
+      q.value = '';
+      cardDetails.forEach(d=> d.style.display='');
+      sectionDetails.forEach((d,i)=> d.open = i===0); // keep the first section open by default
+      setCounts();
+    });
+
+    expandAll.addEventListener('click', ()=> sectionDetails.forEach(d=> d.open = true));
+    collapseAll.addEventListener('click', ()=> sectionDetails.forEach(d=> d.open = false));
+
+    // Copy prompt buttons
+    document.addEventListener('click', async (e)=>{
+      const btn = e.target.closest('[data-copy]');
+      if(!btn) return;
+      try{
+        await navigator.clipboard.writeText(btn.getAttribute('data-copy'));
+        btn.textContent = 'Copied!';
+        setTimeout(()=> btn.textContent = 'Copy prompt', 1200);
+      }catch(err){ btn.textContent = 'Press Ctrl/Cmd+C'; setTimeout(()=> btn.textContent = 'Copy prompt', 1400); }
+    });
+
+    setCounts();
+  </script>
+</body>
+</html>

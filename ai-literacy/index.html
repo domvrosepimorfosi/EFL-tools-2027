@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" data-bdd-module="ai-literacy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy & Prompt Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font and basic styling */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Playfair+Display:wght@400..900&display=swap');
+        
+        :root {
+            --primary-color: #6C63FF; /* Vibrant Purple */
+            --secondary-color: #FFA726; /* Energetic Orange */
+            --accent-color: #26C6DA;   /* Bright Cyan */
+            --text-dark: #2C3E50;      /* Dark Blue-Gray */
+            --text-light: #4A4A4A;     /* Medium Gray */
+            --bg-light: #F0F2F5;       /* Light Gray Background */
+            --bg-card: #FFFFFF;        /* White Card Background */
+            --bg-section-accent: #E8EAF6; /* Light Purple for sections */
+            --border-color: #DDE2E7;   /* Light Border */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* Make all paragraph and list text justified */
+        p, li {
+            text-align: justify;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        details {
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            background-color: var(--bg-card);
+            transition: all 0.3s ease;
+        }
+
+        details[open] {
+            background-color: #FFFAEB; /* A softer, warm background when open */
+            border-color: var(--secondary-color);
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.1),
+                        0 3px 7px -3px rgba(0, 0, 0, 0.08);
+        }
+
+        summary {
+            cursor: pointer;
+            padding: 1.25rem 1.5rem;
+            font-weight: 700;
+            list-style: none;
+            color: var(--primary-color);
+        }
+
+        summary:hover {
+            color: var(--secondary-color);
+        }
+
+        .summary-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-title::after {
+            content: '▼';
+            transition: transform 0.3s ease;
+            color: var(--accent-color);
+        }
+
+        details[open] .summary-title::after {
+            content: '▲';
+        }
+
+        .text-primary { color: var(--primary-color); }
+        .bg-primary-light { background-color: var(--bg-section-accent); }
+        .text-secondary { color: var(--secondary-color); }
+        .text-accent { color: var(--accent-color); }
+        .border-primary { border-color: var(--primary-color); }
+
+        /* Logo ~20% larger than h-12/md:h-16 */
+        .logo-img {
+            width: 3.6rem;   /* 20% larger than 3rem */
+            height: 3.6rem;
+        }
+
+        @media (min-width: 768px) {
+            .logo-img {
+                width: 4.8rem;   /* 20% larger than 4rem */
+                height: 4.8rem;
+            }
+        }
+
+        /* Main title ~10% smaller than Tailwind text-4xl/md:text-5xl */
+        .title-main {
+            font-size: 2.025rem; /* ~10% smaller than 2.25rem (text-4xl) */
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .title-main {
+                font-size: 2.7rem; /* ~10% smaller than 3rem (text-5xl) */
+            }
+        }
+
+        /* Pact title smaller so it fits on one line more easily */
+        .pact-title {
+            font-size: 1.25rem; /* similar to text-xl */
+        }
+
+        @media (min-width: 768px) {
+            .pact-title {
+                font-size: 1.5rem; /* similar to text-2xl */
+            }
+        }
+
+        /* Justified text utility (kept for optional use) */
+        .text-justify {
+            text-align: justify;
+        }
+    </style>
+<link rel="stylesheet" href="bdd-module-theme.css">
+</head>
+<body class="p-4 md:p-8">
+<div class="library-banner" role="region" aria-label="Digital Teaching Library identity">
+  <div class="library-banner-inner">
+    <div class="library-eyebrow">Digital Teaching Library</div>
+    <div class="library-full-title">Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</div>
+  </div>
+</div>
+
+    <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl">
+        
+        <header class="text-center mb-10">
+            <div class="flex items-center justify-center mb-4">
+                <img src="../assets/pdhub-logo.png" alt="PDHub Logo" class="logo-img mr-4">
+                <h1 class="title-main font-extrabold text-primary">
+                    Navigating the AI Environment
+                </h1>
+            </div>
+            <p class="text-xl text-text-light text-center">
+                Essential Skills for the Modern Student
+            </p>
+        </header>
+
+        <section class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-text-dark mb-4 border-b-2 pb-2 border-primary">
+                What is AI Literacy?
+            </h2>
+            <div class="space-y-4 text-text-light">
+                <p>
+                    <strong>AI Literacy</strong> is the broad, fundamental competency that students need in order to live, learn, and work in a world shaped by artificial intelligence. It is about much more than simply “using an AI tool.” It involves developing the <strong>critical mindset</strong> needed to understand, evaluate, and engage with AI systems responsibly –
+                    especially when students use them to support their own work, not to replace it.
+                </p>
+                <ul class="list-disc list-inside ml-4 space-y-2">
+                    <li>
+                        <strong class="text-primary">Understand:</strong> How AI works, its capabilities, and its limitations 
+                        (for example, that AI can "hallucinate" false information or reproduce bias).
+                    </li>
+                    <li>
+                        <strong class="text-primary">Evaluate:</strong> Critically assessing AI-generated outputs for accuracy, 
+                        relevance, tone, and ethical implications.
+                    </li>
+                    <li>
+                        <strong class="text-primary">Use:</strong> Applying AI tools effectively to support learning, writing, 
+                        and creative work – <strong>without</strong> letting the AI take over or “do the whole assignment” for the student.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-10 p-6 bg-primary-light rounded-xl">
+            <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">
+                The Core Skill: Prompt Engineering
+            </h2>
+            <p class="text-lg text-text-dark">
+                <strong>Prompt Engineering</strong> (sometimes called <strong>Prompt Literacy</strong>) is the specific skill set within AI Literacy focused on crafting clear, targeted prompts so that AI can offer useful <strong>suggestions, explanations, and models</strong>.
+                In an educational context, this means teachers and students learn to ask for support (ideas, feedback, models) in a way that helps the student remain the <strong>main author and decision-maker</strong> in the task.
+            </p>
+        </section>
+
+        <section>
+            <h2 class="text-2xl md:text-3xl font-bold text-text-dark mb-6 border-b-2 pb-2 border-primary">
+                Key Strategies: How to Master Prompting
+            </h2>
+            
+            <p class="text-text-light mb-4">
+                The strategies below can be used directly with students. The sample prompts are written in the first person so that
+                learners can copy and adapt them when working with AI <strong>under teacher guidance</strong>.
+            </p>
+            <p class="text-text-light mb-6">
+                In every case, the goal is for the student to stay <strong>actively involved</strong> – planning, drafting, and revising –
+                while the AI acts as a <strong>supporting tool</strong>, not a replacement for their own thinking and writing.
+            </p>
+
+            <div id="strategies-container">
+                
+                <details>
+                    <summary>
+                        <span class="summary-title">1. Define the Role & Audience (The Persona Principle)</span>
+                    </summary>
+                    <div class="p-4 md:p-6 bg-white border-t border-gray-200 text-text-light space-y-3">
+                        <p class="font-semibold">What to do:</p>
+                        <p>
+                            Ask the AI to adopt a specific persona or expertise (for example, “English teacher working with B1 students”)
+                            and clearly define who you are and what you are trying to do as a student. Learners can introduce themselves
+                            (“I am a B1-level student …”) so the AI tailors its explanations and tasks to their level.
+                        </p>
+                        <p class="font-semibold text-sm text-secondary">Why it works:</p>
+                        <p>
+                            Clearly defining the role and the audience narrows the model's focus, vocabulary, and tone, so the output is 
+                            more appropriate for school work. It also helps the AI give explanations and follow-up tasks that the student
+                            still has to think about, respond to, and build on – instead of receiving a “finished product.”
+                        </p>
+                        <div class="mt-4 p-3 bg-gray-100 rounded-lg">
+                            <p class="font-mono text-sm">
+                                Example student prompt:<br>
+                                "I am a B1-level secondary school student. Act as my English teacher. Explain the difference between
+                                'since' and 'for' in the Present Perfect tense using simple language. Give me 2 example sentences.
+                                Then ask me to write 2 new sentences of my own using 'since' and 'for', and help me correct my sentences."
+                            </p>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        <span class="summary-title">2. Set Specific Criteria & Constraints (The Rulebook Principle)</span>
+                    </summary>
+                    <div class="p-4 md:p-6 bg-white border-t border-gray-200 text-text-light space-y-3">
+                        <p class="font-semibold">What to do:</p>
+                        <p>
+                            Be explicit about the required length, format, language level, and the kind of help you want. As a student,
+                            you can ask the AI to give you an outline, a checklist, or feedback on your own writing – instead of asking it
+                            to write the whole thing for you.
+                        </p>
+                        <p class="font-semibold text-sm text-secondary">Why it works:</p>
+                        <p>
+                            AI is powerful but needs structure. Constraints and clear instructions prevent generic, overlong answers and 
+                            keep the AI in a <strong>support role</strong>. Students learn to define the task and use AI to improve
+                            their own text, rather than to bypass the effort of writing.
+                        </p>
+                        <div class="mt-4 p-3 bg-gray-100 rounded-lg">
+                            <p class="font-mono text-sm">
+                                Example student prompt:<br>
+                                "I have to write a short paragraph (about 5 sentences) describing my favourite hobby for homework.
+                                First, help me plan it by giving me a simple outline in English. After I paste my own paragraph,
+                                check if I used only the Past Simple tense and show me up to 3 corrections with short explanations."
+                            </p>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        <span class="summary-title">3. Provide Context & Examples (The Background Principle)</span>
+                    </summary>
+                    <div class="p-4 md:p-6 bg-white border-t border-gray-200 text-text-light space-y-3">
+                        <p class="font-semibold">What to do:</p>
+                        <p>
+                            Give the AI the necessary background information before asking for help: for example, paste a paragraph
+                            you have written, the teacher’s task, or a model text. Then ask for feedback, suggestions, or questions
+                            that help you improve your own work.
+                        </p>
+                        <p class="font-semibold text-sm text-secondary">Why it works:</p>
+                        <p>
+                            This allows the AI to “see” the student’s real level and the actual task. Instead of producing a generic
+                            answer, the AI acts like a language coach, responding to authentic student writing and helping the learner
+                            move from a first draft to a stronger version.
+                        </p>
+                        <div class="mt-4 p-3 bg-gray-100 rounded-lg">
+                            <p class="font-mono text-sm">
+                                Example student prompt:<br>
+                                "I wrote the paragraph below for my English class. Please identify up to 5 important vocabulary
+                                or grammar problems and suggest better alternatives. Explain briefly in everyday English why
+                                each suggestion is better. Do not rewrite the whole paragraph for me.
+                                Paragraph: [paste your paragraph here]."
+                            </p>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        <span class="summary-title">4. Iterate and Refine (The Editor Principle)</span>
+                    </summary>
+                    <div class="p-4 md:p-6 bg-white border-t border-gray-200 text-text-light space-y-3">
+                        <p class="font-semibold">What to do:</p>
+                        <p>
+                            Treat the first AI response – and your own first draft – as the start of a conversation, not the final product.
+                            Use follow-up prompts to ask for changes, improvements, or clarifications. Your goal as a student is to
+                            <strong>understand and control</strong> each change, not to accept everything automatically.
+                        </p>
+                        <p class="font-semibold text-sm text-secondary">Why it works:</p>
+                        <p>
+                            Iteration turns the AI into a partner in revision. Students practise reading critically, requesting targeted
+                            improvements, and reflecting on why one version of a sentence or paragraph is better than another.
+                            The AI becomes a tool for <strong>metacognition</strong>, not a shortcut.
+                        </p>
+                        <div class="mt-4 p-3 bg-gray-100 rounded-lg">
+                            <p class="font-mono text-sm">
+                                Example student prompt:<br>
+                                "The paragraph you helped me improve is still a bit too formal for a secondary school student.
+                                Please rewrite only the second paragraph in a simpler, more natural style, but keep my original ideas.
+                                After you show me the new version, list 3 small changes you made and explain why they make the text better."
+                            </p>
+                        </div>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <section class="mb-10 pt-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-text-dark mb-4 border-b-2 pb-2 border-primary">
+                Why AI Literacy is Essential for Students
+            </h2>
+            <p class="text-text-light mb-6">
+                The discussion around AI in education often focuses on the risks (cheating, loss of critical thinking),
+                leading many to argue for restricting or avoiding its use. However, a strong counter-argument centers on
+                the need to equip students with the <strong>essential competencies</strong> required for the 21st-century world.
+                The goal is not for AI to “do the work,” but for students to learn how to <strong>stay in control</strong>
+                of AI tools and to use them wisely.
+            </p>
+
+            <details>
+                <summary>
+                    <span class="summary-title">1. AI is a Mandatory Workplace Skill (Relevance)</span>
+                </summary>
+                <div class="p-4 md:p-6 bg-white border-t border-gray-200 text-text-light space-y-3">
+                    <p>
+                        The most compelling argument for promoting AI use is that it is rapidly becoming non-optional in professional settings.
+                        AI tools are not just for coders; they are integral to marketing, finance, design, engineering, administration,
+                        and education itself. Students who lack the skill to ethically and efficiently use AI for research, drafting,
+                        and analysis will be at a severe <strong>competitive disadvantage</strong> in the job market.
+                    </p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li>
+                            <strong>Productivity and Efficiency:</strong> The ability to use AI to handle routine tasks
+                            (for example, summarising long texts or checking grammar) allows students and professionals to 
+                            dedicate more time to <strong>higher-order thinking</strong> and creative problem-solving.
+                        </li>
+                        <li>
+                            <strong>AI as a Collaborator:</strong> The skill is shifting from “doing all the work yourself”
+                            to <strong>“organising, supervising, and evaluating”</strong> the work – including what AI suggests.
+                            Students therefore need to practise being the human in charge, not a passive recipient of AI output.
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="summary-title">2. Cultivating Critical Judgment, Not Reliance (Critical Thinking)</span>
+                </summary>
+                <div class="p-4 md:p-6 bg-white border-t border-gray-200 text-text-light space-y-3">
+                    <p>
+                        A fear exists that AI leads to reliance and degrades critical thinking. The reality is that learning
+                        to manage AI can force a <em>new form</em> of critical thinking – if it is taught explicitly and used responsibly.
+                    </p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li>
+                            <strong>Verifying Outputs:</strong> Promoting AI literacy means teaching students to 
+                            <strong>critically evaluate</strong> the source, accuracy, and tone of every output they receive,
+                            as AI often “hallucinates” (produces false information). This transforms students from simple
+                            consumers into active, critical readers.
+                        </li>
+                        <li>
+                            <strong>Problem Formulation:</strong> Using AI effectively requires students to clearly define the
+                            problem, the constraints, and the desired outcome. This need for clarity strengthens
+                            <strong>logical and analytical skills</strong> and makes thinking visible.
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="summary-title">3. Equity and Access (Social Responsibility)</span>
+                </summary>
+                <div class="p-4 md:p-6 bg-white border-t border-gray-200 text-text-light space-y-3">
+                    <p>
+                        Avoiding the promotion of AI literacy can unintentionally worsen existing societal inequalities.
+                        By making AI literacy an explicit part of schooling, educators ensure that <strong>all students</strong>,
+                        not only those with extra support at home, have the opportunity to practise responsible AI use.
+                    </p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li>
+                            <strong>Closing the Gap:</strong> Students in well-resourced environments will gain proficiency anyway.
+                            Universal AI education ensures that all students are prepared for the future workplace and civic life.
+                        </li>
+                        <li>
+                            <strong>Empowering the Learner:</strong> For EFL students in particular, AI can act as a personalised,
+                            non-judgmental tutor, providing immediate feedback on vocabulary and grammar. Used under teacher guidance,
+                            this is a major <strong>equity boost</strong> for language learning.
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <p class="text-text-light mt-6">
+                The question is no longer <em>if</em> students should use AI, but <em>how</em>. By actively teaching
+                <strong>Prompt Engineering</strong>, critical evaluation, and ethical guidelines, educators can help students
+                keep their <strong>voice, agency, and responsibility</strong>, while transforming AI from a potential shortcut
+                into a powerful tool for learning.
+            </p>
+        </section>
+
+        <!-- CLASSROOM AI USE PACT (English version of the "contract") -->
+        <section class="mb-10 p-6 bg-white rounded-xl border border-primary">
+            <h2 class="pact-title font-bold text-text-dark mb-3">
+                Classroom AI Use Pact (Student–AI Collaboration)
+            </h2>
+            <p class="text-text-light mb-4">
+                Before students use AI systems to support their learning or to work on assignments, it helps to agree
+                on a simple shared “pact”. For example, the following points can be discussed and adapted with each class:
+            </p>
+            <ul class="list-disc list-inside ml-4 space-y-2 text-text-light">
+                <li>
+                    <strong>AI is a helper, not the author:</strong>
+                    I use AI to get ideas, explanations, and feedback, but I still plan, write, and edit my own work.
+                    I never copy and paste a whole AI answer and present it as if I wrote it myself.
+                </li>
+                <li>
+                    <strong>I stay responsible for my work:</strong>
+                    I check whether AI suggestions are correct, make sense, and match my teacher’s instructions.
+                    If I use AI, I am ready to explain <em>how</em> it helped me and which parts of the text are my own.
+                </li>
+                <li>
+                    <strong>I follow safety and classroom rules:</strong>
+                    I do not share personal data with AI tools, I do not ask them to create inappropriate content,
+                    and I always follow my school’s and teacher’s guidelines on when and how AI can be used.
+                </li>
+            </ul>
+        </section>
+
+        <section class="mb-10 pt-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-text-dark mb-4 border-b-2 pb-2 border-primary">
+                Select Bibliography
+            </h2>
+            <div class="space-y-3 text-text-light text-sm">
+                <p>
+                    <strong class="text-primary">Ertmer, P. A., & Newby, T. J.</strong> (2013).
+                    "Behaviorism, Cognitivism, Constructivism: Comparing Critical Features From an Instructional Design Perspective."
+                    <em>Performance Improvement Quarterly</em>, 26(2), 43–71.
+                </p>
+                <p>
+                    <strong class="text-primary">Hase, P., & Bansal, M.</strong> (2022).
+                    "Prompt Engineering for Large Language Models." <em>Preprint</em>.
+                </p>
+                <p>
+                    <strong class="text-primary">Ng, D.</strong> (2023).
+                    "AI Literacy: A Foundational Skill for the 21st Century."
+                    <em>Journal of Digital Education</em>, 15(1), 45–62.
+                </p>
+                <p>
+                    <strong class="text-primary">Tuomi, I.</strong> (2023).
+                    "The Social and Economic Implications of Generative AI for Education."
+                    <em>European Commission Joint Research Centre</em>.
+                </p>
+                <p>
+                    <strong class="text-primary">UNESCO.</strong> (2021).
+                    <em>Recommendation on the Ethics of Artificial Intelligence</em>. Paris: UNESCO Publishing.
+                </p>
+            </div>
+        </section>
+
+        <footer class="mt-10 pt-6 border-t text-center text-gray-400 text-sm">
+            ✨✍️ Created by Panagiotis Domvros, English and Drama Teacher, All Rights Reserved ✍️✨
+        </footer>
+
+    </div>
+
+</body>
+</html>

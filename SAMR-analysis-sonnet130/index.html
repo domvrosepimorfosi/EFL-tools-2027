@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" data-bdd-module="SAMR-analysis-sonnet130">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Sonnet to Social Feed</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Set custom font (Inter) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Justify all paragraph and list item text */
+        p, li {
+            text-align: justify;
+        }
+        /* Custom styles for the collapsible details/summary */
+        details > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        /* Custom chevron marker */
+        details > summary::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] > summary::after {
+            transform: rotate(180deg);
+        }
+        /* Smooth opening animation */
+        details[open] > div {
+            animation: sweep 0.3s ease-in-out;
+        }
+        @keyframes sweep {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+<link rel="stylesheet" href="bdd-module-theme.css">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen p-4 md:p-8">
+<div class="library-banner" role="region" aria-label="Digital Teaching Library identity">
+  <div class="library-banner-inner">
+    <div class="library-eyebrow">Digital Teaching Library</div>
+    <div class="library-full-title">Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</div>
+  </div>
+</div>
+
+    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+        
+        <!-- Header Section -->
+        <header class="p-6 md:p-8 border-b border-gray-200 dark:border-gray-700">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <!-- Logo -->
+                    <img src="../assets/pdhub-logo.png" alt="PD Hub Logo" class="w-16 h-16 md:w-20 md:h-20 rounded-full shadow-md"
+                         onerror="this.src='https://placehold.co/80x80/1f2937/ffffff?text=Logo'; this.onerror=null;">
+                    <!-- Title -->
+                    <h1 class="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white">
+                        From Sonnet to Social Feed
+                    </h1>
+                </div>
+                <h2 class="text-lg md:text-xl font-medium text-gray-600 dark:text-gray-300 md:text-right">
+                    Deconstructing Comparisons with SAMR
+                </h2>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="p-6 md:p-8 space-y-8">
+
+            <!-- Introduction -->
+            <section>
+                <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                    This project outlines a complete, multi-stage lesson designed to move students from basic comprehension to authentic creation. It uses Shakespeare's Sonnet 130 as the core text to explore the concept of "comparisons" and "anti-comparisons."
+                </p>
+                <p class="mt-4 text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                 
+                </p>
+            </section>
+
+            <!-- Project Files -->
+            <section>
+                <h3 class="text-xl font-semibold mb-4 border-b border-gray-300 dark:border-gray-600 pb-2">Project Files</h3>
+                <ul class="space-y-3 list-inside">
+                    <li class="flex items-center gap-3">
+                        <span class="text-blue-500">►</span>
+                        <div>
+                            <strong>Sonnet 130 Instagram Carousel:</strong>
+                            <a href="https://domvrosepimorfosi.github.io/sonnet130-comparisons/" target="_blank" rel="noopener noreferrer" class="ml-1 text-blue-500 dark:text-blue-400 hover:underline break-all">
+                                Interactive post with audio and translation.
+                            </a>
+                        </div>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-blue-500">►</span>
+                        <div>
+                            <strong>Comparison Quiz:</strong>
+                            <a href="https://wordwall.net/resource/101372096" target="_blank" rel="noopener noreferrer" class="ml-1 text-blue-500 dark:text-blue-400 hover:underline break-all">
+                                Wordwall game for comprehension.
+                            </a>
+                        </div>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-blue-500">►</span>
+                        <div>
+                            <strong>Creation Hub (Padlet Wall):</strong>
+                            <a href="https://domvrosepimorfosi.github.io/anticomparison-InstaFeed/" target="_blank" rel="noopener noreferrer" class="ml-1 text-blue-500 dark:text-blue-400 hover:underline break-all">
+                                Interactive web space for student creation.
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Lesson Flow & SAMR Analysis (Collapsibles) -->
+            <section>
+                <h3 class="text-xl font-semibold mb-4 border-b border-gray-300 dark:border-gray-600 pb-2">Lesson Flow & SAMR Analysis</h3>
+                <div class="space-y-4">
+
+                    <!-- 1. Substitution (Purple/Pink) -->
+                    <details class="bg-purple-50 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-800 rounded-lg overflow-hidden">
+                        <summary class="p-5 font-semibold text-lg text-purple-800 dark:text-purple-100 bg-purple-100 dark:bg-purple-900/70">
+                            1. Stage: Substitution (S)
+                        </summary>
+                        <div class="p-5 space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-md text-purple-700 dark:text-purple-200">Activity:</h4>
+                                <p class="mt-1 text-gray-700 dark:text-gray-300">As a pre-lesson or warm-up, students read a static digital version of Sonnet 130 (e.g., a PDF or a plain text file) on their devices. They then type answers to basic comprehension questions (e.g., "What is the mistress's hair compared to?") into a separate Google doc which they share with the teacher.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-md text-purple-700 dark:text-purple-200">SAMR Analysis (Substitution):</h4>
+                                <p class="mt-1 text-gray-700 dark:text-gray-300">This is a direct, 1-to-1 substitute for a paper handout of the poem and a paper worksheet. The technology acts as a simple replacement with no functional change to the task.</p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- 2. Modification (Yellow) -->
+                    <details class="bg-yellow-50 dark:bg-yellow-900/50 border border-yellow-200 dark:border-yellow-800 rounded-lg overflow-hidden">
+                        <summary class="p-5 font-semibold text-lg text-yellow-800 dark:text-yellow-100 bg-yellow-100 dark:bg-yellow-900/70">
+                            2. Stage: Modification (M)
+                        </summary>
+                        <div class="p-5 space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-md text-yellow-700 dark:text-yellow-200">Activity:</h4>
+                                <p class="mt-1 text-gray-700 dark:text-gray-300">Students engage with the core text using the <a href="https://domvrosepimorfosi.github.io/sonnet130-comparisons/" target="_blank" rel="noopener noreferrer" class="text-blue-500 dark:text-blue-400 hover:underline"><strong>Interactive Instagram Carousel</strong></a>. They are instructed to explore the sonnet slide by slide. The carousel format breaks the complex poem into manageable quatrains, forcing focused analysis of each "anti-comparison." The background music creates an immersive, multi-sensory experience. Students click the caption text to reveal the pop-up modern translation, scaffolding their comprehension on demand.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-md text-yellow-700 dark:text-yellow-200">SAMR Analysis (Modification):</h4>
+                                <p class="mt-1 text-gray-700 dark:text-gray-300">This is not just a digital poem. The task of "analysing a sonnet" is <strong>significantly redesigned</strong>. The Instagram UI re-contextualizes the 400-year-old text, while the interactive tooltips and paced-out content (carousel slides) fundamentally modify the <em>way</em> a student interacts with and deciphers the poem.</p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- 3. Augmentation (Orange) -->
+                    <details class="bg-orange-50 dark:bg-orange-900/50 border border-orange-200 dark:border-orange-800 rounded-lg overflow-hidden">
+                        <summary class="p-5 font-semibold text-lg text-orange-800 dark:text-orange-100 bg-orange-100 dark:bg-orange-900/70">
+                            3. Stage: Augmentation (A)
+                        </summary>
+                        <div class="p-5 space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-md text-orange-700 dark:text-orange-200">Activity:</h4>
+                                <p class="mt-1 text-gray-700 dark:text-gray-300">After exploring the sonnet, students open the <a href="https://wordwall.net/resource/101372096" target="_blank" rel="noopener noreferrer" class="text-blue-500 dark:text-blue-400 hover:underline"><strong>Wordwall Quiz</strong></a> to check their understanding. They play the gamified quiz to review the sonnet's comparisons and their meanings and simultaneously be reminded of comparison structures without being presented with a typical table of possible forms of comparison.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-md text-orange-700 dark:text-orange-200">SAMR Analysis (Augmentation):</h4>
+                                <p class="mt-1 text-gray-700 dark:text-gray-300">This task is a direct substitute for a traditional matching quiz, but with significant functional improvements. The technology <strong>augments</strong> the task with:</p>
+                                <ul class="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300 space-y-1 pl-4">
+                                    <li><strong>Gamification:</strong> Timers, scoring, and leader boards increase engagement.</li>
+                                    <li><strong>Instant Feedback:</strong> Students immediately know if their answers are correct, reinforcing learning in real-time.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- 4. Redefinition (Green) -->
+                    <details class="bg-green-50 dark:bg-green-900/50 border border-green-200 dark:border-green-800 rounded-lg overflow-hidden">
+                        <summary class="p-5 font-semibold text-lg text-green-800 dark:text-green-100 bg-green-100 dark:bg-green-900/70">
+                            4. Stage: Redefinition (R)
+                        </summary>
+                        <div class="p-5 space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-md text-green-700 dark:text-green-200">Activity:</h4>
+                                <p class="mt-1 text-gray-700 dark:text-gray-300">The final and most crucial task. Students move from analysis to creation using a <a href="https://domvrosepimorfosi.github.io/anticomparison-InstaFeed/" target="_blank" rel="noopener noreferrer" class="text-blue-500 dark:text-blue-400 hover:underline"><strong>Padlet Wall</strong></a> set to the Stream format. The task is two-part:</p>
+                                <ul class="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300 space-y-2 pl-4">
+                                    <li><strong>Create:</strong> Each student must publish their own original "anti-comparison" inspired by Sonnet 130. This post must include their "username," their original text, and a multimedia element (image, GIF, etc.).</li>
+                                    <li><strong>Interact:</strong> After posting, each student must interact with the class "feed" by "liking" at least three other posts and "commenting" on at least two others to provide peer feedback.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-md text-green-700 dark:text-green-200">SAMR Analysis (Redefinition):</h4>
+                                <p class="mt-1 text-gray-700 dark:text-gray-300">The technology allows for a <strong>new task that was previously inconceivable</strong>. Students are not "handing in" an assignment. They are:</p>
+                                <ul class="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300 space-y-1 pl-4">
+                                    <li><strong>Creating</strong> a new, original multimedia artefact.</li>
+                                    <li><strong>Publishing</strong> their work to an authentic, live audience (their peers).</li>
+                                    <li><strong>Collaborating</strong> in an asynchronous digital space through comments and reactions.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+
+                </div>
+            </section>
+
+            <!-- Wrap-up Image -->
+            <section>
+                <h3 class="text-xl font-semibold mb-4 border-b border-gray-300 dark:border-gray-600 pb-2">Lesson Overview</h3>
+                <div class="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 flex justify-center items-center">
+                    <img src="Lesson.png" alt="SAMR Model for Sonnet 130" class="max-w-full h-auto rounded-md shadow-lg"
+                         onerror="this.src='https://placehold.co/800x450/374151/ffffff?text=Lesson+Overview+Image'; this.onerror=null;">
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="p-6 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
+            ✨✍️ Created by Panagiotis Domvros, English and Drama Teacher, All Rights Reserved ✍️✨
+        </footer>
+
+    </div>
+
+</body>
+</html>

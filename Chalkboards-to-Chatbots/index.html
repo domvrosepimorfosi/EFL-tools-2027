@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-bdd-module="Chalkboards-to-Chatbots">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Chalkboards to Chatbots</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* flex-wrap: wrap; <-- REMOVED to keep items on one line */
+            text-align: left; /* Aligns text neatly next to the logo */
+            color: #005a9c;
+            padding: 20px;
+            margin: 0;
+            border-bottom: 2px solid #eee;
+            font-size: 2.0rem; /* Slightly reduced to help fit on one line */
+        }
+        .header-logo {
+            height: 120px; /* As requested */
+            width: 120px;  /* As requested */
+            margin-right: 20px; 
+            border-radius: 50%; /* Makes the image circular */
+            border: none;
+            flex-shrink: 0; /* Prevents logo from shrinking */
+        }
+        details {
+            border-bottom: 1px solid #ddd;
+        }
+        details:last-child {
+            border-bottom: none;
+        }
+        summary {
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 20px;
+            cursor: pointer;
+            list-style: none; /* Remove default marker */
+            position: relative;
+            color: #ffffff; /* White text for bold backgrounds */
+            transition: background-color 0.2s;
+        }
+        summary::-webkit-details-marker {
+            display: none; /* Hide for Webkit */
+        }
+        summary:hover {
+            filter: brightness(110%); /* Brighten on hover */
+        }
+        summary::after { /* Custom marker */
+            content: '►';
+            font-size: 0.8em;
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.2s;
+            color: #ffffff; /* White arrow */
+        }
+        details[open] > summary::after {
+            transform: translateY(-50%) rotate(90deg);
+        }
+        .content {
+            padding: 20px 30px 20px 30px;
+            border-top: 1px solid #eee;
+            background-color: #fff; /* Ensure content area is white */
+        }
+        
+        /* --- Vivid/Bold Colors for Main Collapsibles --- */
+        #section1 > summary { background-color: #007bff; } /* Bold Blue */
+        #section2 > summary { background-color: #28a745; } /* Bold Green */
+        #section3 > summary { background-color: #dc3545; } /* Bold Red */
+        #section4 > summary { background-color: #fd7e14; } /* Bold Orange */
+        #section5 > summary { background-color: #6f42c1; } /* Bold Purple */
+        #section6 > summary { background-color: #17a2b8; } /* Bold Teal */
+
+        /* --- Nested details for the frameworks --- */
+        .content details {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        .content summary {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        /* --- Colors for Nested Lenses --- */
+        #lens-tpack > summary { background-color: #00b4d8; color: #ffffff; }
+        #lens-samr > summary { background-color: #48cae4; color: #000000; }
+        #lens-blooms > summary { background-color: #90e0ef; color: #000000; }
+        #lens-dok > summary { background-color: #ade8f4; color: #000000; }
+
+        /* Arrow colors for nested lenses */
+        #lens-tpack > summary::after { color: #ffffff; }
+        #lens-samr > summary::after { color: #000000; }
+        #lens-blooms > summary::after { color: #000000; }
+        #lens-dok > summary::after { color: #000000; }
+        
+        .content .content { /* Content inside nested details */
+            background-color: #ffffff;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        blockquote {
+            border-left: 4px solid #007bff;
+            padding-left: 15px;
+            margin-left: 0;
+            font-style: italic;
+            background-color: #f8f9fa;
+        }
+        
+        /* --- Image resized to 50% and centered (Only in .content) --- */
+        .content img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 6px;
+            margin: 10px auto; /* Centers the image */
+            border: 1px solid #ccc;
+            display: block; /* Required for margin: auto to work */
+        }
+
+        /* --- Footer Style --- */
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+    </style>
+<link rel="stylesheet" href="bdd-module-theme.css">
+</head>
+<body>
+<div class="library-banner" role="region" aria-label="Digital Teaching Library identity">
+  <div class="library-banner-inner">
+    <div class="library-eyebrow">Digital Teaching Library</div>
+    <div class="library-full-title">Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</div>
+  </div>
+</div>
+
+    <div class="container">
+        <h1>
+            <img src="../assets/pdhub-logo.png" alt="PD Hub Logo" class="header-logo">
+            From Chalkboards to Chatbots: Building an AI Pedagogy for the Greek EFL Classroom
+        </h1>
+
+        <details id="section1"> <summary>The "New" ICT: What is AI and AI Pedagogy?</summary>
+            <div class="content">
+                <p>We've discussed using ICT—websites, quiz tools, video, interactive whiteboards. These are fantastic tools but they might be yesterday’s news! What everybody is talking about today is AI.</p>
+                
+                <h3>Key Terms</h3>
+                <ul>
+                    <li><strong>Artificial Intelligence (AI):</strong> The broad idea of a machine that can "think"—solve problems, understand language, learn.</li>
+                    <li><strong>Generative AI (GenAI):</strong> This is what you see everywhere (like ChatGPT, Google's Gemini, DALL-E for images). It generates new text, images, or audio based on a user's prompt.</li>
+                    <li><strong>Prompt:</strong> The instruction you give to the AI. "Write an email," "Explain this grammar," "Create a story." As teachers, "prompting" will become a new core skill.</li>
+                    <li><strong>AI Pedagogy:</strong> It's not just "using AI tools." It's your philosophy, strategy, and reflection on how and why to use AI to achieve specific learning goals. We can’t just pick any tool that looks exciting and start using it as if it’s automatically improving learning. Our job is to move from excitement (the "shiny new toy") to intentionality. There must be a plan, a road map. That plan is our AI Pedagogy.</li>
+                </ul>
+                <p>We don't need to invent a new pedagogy from scratch! There are foundational educational frameworks we already know. We just need to apply an "AI lens" to them.</p>
+            </div>
+        </details>
+
+        <details id="section2">
+            <summary>The "Road Map": Four Lenses to Guide AI Integration</summary>
+            <div class="content">
+                <p>These frameworks are your essential guides for making intentional, pedagogically-sound decisions.</p>
+                
+                <img src="pedagogy.jpg" alt="Diagram showing AI Integration Frameworks: SAMR, Bloom's, TPACK, and DOK">
+
+                <details id="lens-tpack">
+                    <summary>Lens 1: TPACK (The "What Fits Where" Framework)</summary>
+                    <div class="content">
+                        <p>This is the most important framework for you. It's about balancing three things:</p>
+                        <ul>
+                            <li><strong>Technology:</strong> The AI tool itself (e.g., ChatGPT).</li>
+                            <li><strong>Pedagogy:</strong> Your teaching method (e.g., communicative approach, task-based learning).</li>
+                            <li><strong>Content:</strong> Your subject matter (e.g., EFL grammar, vocabulary, literature).</li>
+                        </ul>
+                        <img src="tpack.jpg" alt="TPACK Diagram showing the intersection of Technology, Pedagogy, and Content">
+                        <p>"AI-TPACK" is the intersection spot in the middle.</p>
+                        
+                        <p><strong>Bad AI Use (No balance):</strong></p>
+                        <blockquote>"Everyone, for homework, ask ChatGPT to write an essay on 'The Great Gatsby'."
+                        <br><strong>Why?</strong> It ignores Pedagogy (students learn nothing) and Content (they don't engage with the book). It's just a Technology shortcut.</blockquote>
+                        
+                        <p><strong>Good AI-TPACK Use:</strong></p>
+                        <blockquote>"You are a detective. You must 'interview' a character from 'The Great Gatsby.' Use ChatGPT as that character (T) to practice your question-forming (C) and argumentative language (C). We will perform your interviews in class (P)."</blockquote>
+                    </div>
+                </details>
+
+                <details id="lens-samr">
+                    <summary>Lens 2: SAMR (The "How Much Impact" Framework)</summary>
+                    <div class="content">
+                        <p>This model helps you evaluate how transformative your AI use is. Is it just a gimmick, or is it truly changing the learning?</p>
+                        <ul>
+                            <li><strong>Substitution:</strong> AI as a basic substitute.
+                                <ul><li>EFL Example: Instead of a paper dictionary, students ask AI "What does 'ephemeral' mean?"</li></ul>
+                            </li>
+                            <li><strong>Augmentation:</strong> AI adds a functional improvement.
+                                <ul><li>EFL Example: Students write a sentence, and AI rephrases it in three different ways (e.g., more formal, more informal, more persuasive).</li></ul>
+                            </li>
+                            <li><strong>Modification:</strong> AI significantly redesigns the task.
+                                <ul><li>EFL Example: Students co-write a short story with AI. The student writes one paragraph, AI writes the next. The student must then correct the AI's paragraph for tone and consistency.</li></ul>
+                            </li>
+                            <li><strong>Redefinition:</strong> AI allows for new tasks that were previously impossible.
+                                <ul><li>EFL Example: Students design their own AI chatbot (using simple tools) that teaches a specific grammar rule (e.g., "Third Conditional Bot") to their classmates.</li></ul>
+                            </li>
+                        </ul>
+                        <p><strong>Your Goal:</strong> Try to move beyond S and A. Aim for M and R to create powerful learning experiences.</p>
+                    </div>
+                </details>
+
+                <details id="lens-blooms">
+                    <summary>Lens 3: Bloom's Revised Taxonomy (The "Thinking Deeper" Framework)</summary>
+                    <div class="content">
+                        <p>This helps you ensure you're using AI to promote higher-order thinking, not just basic recall.</p>
+                        <ul>
+                            <li><strong>Remembering (Low):</strong> "Ask AI for a list of 10 phrasal verbs with 'get'."</li>
+                            <li><strong>Understanding (Low):</strong> "Ask AI to explain the difference between 'Present Perfect' and 'Past Simple' as if I'm a 10-year-old."</li>
+                            <li><strong>Applying (Mid):</strong> "Here is a text I wrote. Use AI to apply a C1-level vocabulary to it and rewrite it."</li>
+                            <li><strong>Analysing (High):</strong> "Feed these two news articles on the same topic into AI. Ask it to analyse the bias, tone, and persuasive language used in each."</li>
+                            <li><strong>Evaluating (High):</strong> "Ask AI to write an argument for a topic. Then, you write a counter-argument. Then, ask the AI to evaluate your counter-argument based on a rubric."</li>
+                            <li><strong>Creating (Highest):</strong> "Use an AI image generator to create a series of 5 images. Now, you write a continuous story that connects all 5 images, using past-tense narration."</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details id="lens-dok">
+                    <summary>Lens 4: Webb's Depth of Knowledge (DOK) (The "Task Complexity" Framework)</summary>
+                    <div class="content">
+                        <ul>
+                            <li><strong>DOK 1 (Recall):</strong> "Ask AI for a list of 10 vocabulary words related to 'pollution'." (Simple recall).</li>
+                            <li><strong>DOK 2 (Skill/Concept):</strong> "Write a short paragraph about a factory. Ask AI to check your paragraph and suggest 3 stronger verbs (e.g., change 'make' to 'produce') and 3 more precise nouns (e.g., change 'bad air' to 'emissions')." (Requires applying and improving language).</li>
+                            <li><strong>DOK 3 (Strategic Thinking):</strong> "Give AI a short news article about a recent environmental problem. Ask it to identify the main problem and the proposed solution. Then, you must write a new paragraph explaining two potential weaknesses or unintended consequences of that solution." (Requires analysis, evaluation, and reasoning).</li>
+                            <li><strong>DOK 4 (Extended Thinking):</strong> "Over one week, your group must design a new, practical 'Go Green' plan for our school. You must use AI to:
+                                <ul>
+                                    <li>Research 5 realistic recycling or energy-saving ideas.</li>
+                                    <li>Draft a short, persuasive speech to convince your classmates to join.</li>
+                                </ul>
+                                Your final task is to create a poster for the school hallway that explains your plan, using AI to help you generate slogans and find powerful images." (Long-term, real-world creation, synthesis, and persuasion).
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+            </div>
+        </details>
+
+        <details id="section3">
+            <summary>The Reality Check: AI in the Greek State School</summary>
+            <div class="content">
+                <p>How does this apply to your future classroom?</p>
+                <h3>The Obvious Challenge: Cheating & The State Exams</h3>
+                <p>This is the "elephant in the room." Students will use AI to write their essay.</p>
+                <ul>
+                    <li><strong>The "Old" Way (Fighting it):</strong> Banning AI, using AI detectors (which don't work well), and failing students. This is a losing battle.</li>
+                    <li><strong>The "New" Way (Using it for Process):</strong>
+                        <ul>
+                            <li><strong>Shift Assessment:</strong> Don't only grade the final product. Grade the process.</li>
+                            <li>"Show me your AI prompts."</li>
+                            <li>"Show me the first draft from AI and a list of 5 changes you made and why."</li>
+                            <li>Do more in-class, handwritten writing.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3>Use AI as a Grader, Not a Writer:</h3>
+                <p>This is the best application for Panhellenic Exams practice.</p>
+                <blockquote><strong>Your Prompt:</strong> "Here is my practice essay. Please grade it using the official Panhellenic rubric for 'Structure,' 'Vocabulary,' and 'Grammar.' Tell me exactly where I lost points and give me suggestions to improve."</blockquote>
+                <p>This gives students immediate, personalized feedback that a teacher with 30 students can't possibly provide in time.</p>
+            </div>
+        </details>
+
+        <details id="section4">
+            <summary>Specific EFL Opportunities for Your Classroom</summary>
+            <div class="content">
+                <h3>The Ultimate Differentiator</h3>
+                <p>This is AI's superpower.</p>
+                <ul>
+                    <li><strong>For struggling learners:</strong> "Explain the 'second conditional' to me in simple Greek and give me 5 simple examples."</li>
+                    <li><strong>For advanced learners:</strong> "Take this B1-level text about the environment and rewrite it using C2-level vocabulary and more complex sentence structures."</li>
+                </ul>
+                
+                <h3>The 24/7 Conversation Partner</h3>
+                <p>Our students have no one to practice speaking with. Now they do.</p>
+                <blockquote><strong>AI's Role:</strong> "Let's have a 10-minute spoken conversation about my hobbies. I want you to be a friendly university student. After 10 minutes, give me a list of my 3 biggest grammar mistakes."</blockquote>
+                <p>This builds fluency and reduces "speaking anxiety."</p>
+                
+                <h3>The Creative Content Generator</h3>
+                <p>You are tired of the same old textbook topics.</p>
+                <blockquote><strong>Your Prompt:</strong> "Create a reading comprehension text (B2 level) about Giannis Antetokounmpo. The text must include at least 5 examples of the 'past perfect continuous' tense. Also, create 5 multiple-choice questions based on the text."</blockquote>
+                <p>This makes learning relevant and personalized to your students' interests.</p>
+            </div>
+        </details>
+
+        <details id="section5">
+            <summary>Real-World Challenges We Must Discuss</summary>
+            <div class="content">
+                <ul>
+                    <li><strong>Equity (The Digital Divide):</strong> What about the student in your class who has no computer or good internet at home? If you assign AI-based homework, you are being unfair.
+                        <ul><li><strong>Solution:</strong> Prioritize in-class AI use (if you have a computer lab) or "flipped classroom" models where they view AI-generated content at home and do the "work" in class.</li></ul>
+                    </li>
+                    <li><strong>Policy:</strong> What does the Ministry of Education say? The rules are often unclear or slow. You must be the advocate for responsible use.</li>
+                    <li><strong>Critical AI Literacy:</strong> AI lies. It makes mistakes ("hallucinates"). Your job: Teach students to be critical. Never trust the AI's first answer.
+                        <ul><li><strong>Good activity:</strong> "Ask AI for 10 facts about Shakespeare. Now, let's fact-check them as a class."</li></ul>
+                    </li>
+                </ul>
+            </div>
+        </details>
+
+        <details id="section6">
+            <summary>Our New Role</summary>
+            <div class="content">
+                <p>AI is not going away. It is not just "another ICT tool."</p>
+                <p>Your role as a teacher is changing. You are no longer just the "source of knowledge."</p>
+                <p><strong>You are becoming an "architect of learning experiences."</strong></p>
+                <ul>
+                    <li>You design the prompts.</li>
+                    <li>You scaffold the tasks.</li>
+                    <li>You guide the students on how to use the tool.</li>
+                    <li>You facilitate the critical thinking that happens after the AI has generated its response.</li>
+                </ul>
+                <p>Your goal is not to "teach with AI." Your goal is to Example: Instead of a paper dictionary, students ask AI "What does 'ephemeral' mean?" <strong>improve student learning</strong>... and AI is simply the most powerful new tool you have to do that.</p>
+            </div>
+        </details>
+
+    </div><footer>
+        ✨✍️ Created by Panagiotis Domvros, English and Drama Teacher, All Rights Reserved ✍️✨
+    </footer>
+
+</body>
+</html>

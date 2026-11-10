@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" data-bdd-module="tech-integration">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>27 Quick Win, Low‑Prep Ways to Integrate Tech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #fff7fa;
+      --ink:#18202b;
+      --muted:#5a6572;
+      --chip:#ffe27a;
+      /* section colors */
+      --c1: linear-gradient(135deg,#ff6b6b,#ffd93d);
+      --c2: linear-gradient(135deg,#6a82fb,#fc5c7d);
+      --c3: linear-gradient(135deg,#00c6ff,#0072ff);
+      --c4: linear-gradient(135deg,#43e97b,#38f9d7);
+      --c5: linear-gradient(135deg,#f83600,#f9d423);
+      --c6: linear-gradient(135deg,#b721ff,#21d4fd);
+    }
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:"Quicksand", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      line-height:1.5;
+    }
+    header{
+      position:sticky; top:0; z-index:10; backdrop-filter:saturate(1.4) blur(6px);
+      background:rgba(255,255,255,.8); border-bottom:1px dashed #e5e5ee;
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:16px 20px}
+    h1{
+      font-family:"Fugaz One", cursive; letter-spacing:.5px; margin:8px 0 10px; font-size:clamp(1.4rem,2.5vw,2.2rem);
+    }
+    .sub{color:var(--muted); font-size:.95rem; margin-bottom:12px}
+    .toolbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .search{
+      display:flex; align-items:center; gap:8px; flex:1 1 300px;
+      background:#fff; border:2px solid #ffd0e0; padding:8px 10px; border-radius:14px; box-shadow:0 6px 14px rgba(255,105,180,.12);
+    }
+    .search input{border:none; outline:none; width:100%; font-size:1rem; background:transparent}
+    .btns{display:flex; gap:8px; flex-wrap:wrap}
+    button{
+      border:none; cursor:pointer; border-radius:12px; padding:9px 14px; font-weight:600;
+      background:#ffe27a; box-shadow:0 6px 14px rgba(0,0,0,.08); transition:transform .08s ease;
+    }
+    button:hover{transform:translateY(-1px)}
+    nav{
+      display:flex; gap:8px; flex-wrap:wrap; margin-top:10px
+    }
+    .chip{
+      font-weight:700; font-size:.9rem; padding:8px 12px; border-radius:999px; background:var(--chip);
+      text-decoration:none; color:#222; border:2px solid #fff0a6; box-shadow:0 6px 12px rgba(255,199,0,.25);
+    }
+    main{max-width:1100px; margin:20px auto 70px; padding:0 20px}
+
+    /* Section wrapper */
+    section{margin:20px 0}
+    section > details{
+      border-radius:18px; overflow:hidden; background:#fff; border:2px solid #ffe3ef;
+      box-shadow:0 10px 24px rgba(255,105,180,.14);
+    }
+    summary.section-head{
+      list-style:none; cursor:pointer; padding:16px 18px; display:flex; align-items:center; gap:12px; color:#fff;
+      font-family:"Fugaz One", cursive; letter-spacing:.4px; font-size:1.1rem; text-shadow:0 2px 8px rgba(0,0,0,.15)
+    }
+    summary.section-head::-webkit-details-marker{display:none}
+    .icon{font-size:1.3rem}
+    .count{margin-left:auto; font-weight:700; background:rgba(255,255,255,.2); padding:6px 10px; border-radius:999px}
+
+    .inner{padding:14px 16px 18px; background:linear-gradient(180deg, #ffffff 0%, #fff7fb 100%)}
+
+    /* Activity cards (collapsibles inside) */
+    .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px}
+    details.activity{
+      border:2px solid #ffe1f1; border-radius:16px; overflow:hidden; background:#fff;
+      box-shadow:0 8px 18px rgba(255,105,180,.12);
+    }
+    summary.activity-title{
+      list-style:none; cursor:pointer; padding:12px 14px; font-weight:700; display:flex; align-items:center; gap:8px;
+      background:linear-gradient(135deg,#fff1f7,#fffdf2);
+    }
+    summary.activity-title::-webkit-details-marker{display:none}
+    .tag{font-size:.78rem; padding:4px 8px; border-radius:8px; font-weight:700; background:#e6f7ff; color:#095778; border:1px solid #c7ebff}
+    .body{padding:10px 14px 14px; color:#2a3442}
+
+    /* Section color bands */
+    .c1 summary.section-head{background:var(--c1)}
+    .c2 summary.section-head{background:var(--c2)}
+    .c3 summary.section-head{background:var(--c3)}
+    .c4 summary.section-head{background:var(--c4)}
+    .c5 summary.section-head{background:var(--c5)}
+    .c6 summary.section-head{background:var(--c6)}
+
+    .no-results{display:none; margin:14px 0 0; font-weight:700; color:#a3003b}
+    footer{max-width:1100px; margin:40px auto 60px; padding:0 20px; color:var(--muted); font-size:.9rem}
+    .small{font-size:.85rem}
+  </style>
+<link rel="stylesheet" href="bdd-module-theme.css">
+</head>
+<body>
+<div class="library-banner" role="region" aria-label="Digital Teaching Library identity">
+  <div class="library-banner-inner">
+    <div class="library-eyebrow">Digital Teaching Library</div>
+    <div class="library-full-title">Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</div>
+  </div>
+</div>
+  <header>
+    <div class="wrap">
+      <h1>27 Quick Win, Low‑Prep Ways to Integrate Tech by Crystal Uhiren</h1>
+      <p class="sub">Bright, clickable ideas you can use today. Search, expand sections, and pop open any card to read the how‑to.</p>
+      <div class="toolbar">
+        <label class="search" aria-label="Search activities">
+          <span>🔎</span>
+          <input id="q" type="search" placeholder="Filter by keyword (e.g., Padlet, timeline, Canva, SEL)…" />
+        </label>
+        <div class="btns">
+          <button id="expandAll" title="Expand all sections">⤢ Expand All</button>
+          <button id="collapseAll" title="Collapse all sections">⤡ Collapse All</button>
+          <button id="reset" title="Clear search and resets view">↺ Reset</button>
+        </div>
+      </div>
+      <nav aria-label="Jump to section">
+        <a class="chip" href="#quick">🚀 Quick Starts</a>
+        <a class="chip" href="#checks">✅ Checks</a>
+        <a class="chip" href="#collab">💬 Collaboration</a>
+        <a class="chip" href="#writing">✍️ Writing</a>
+        <a class="chip" href="#sel">💛 SEL</a>
+        <a class="chip" href="#exit">🎯 Reflection</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="quick">
+      <details class="c1">
+        <summary class="section-head"><span class="icon">🚀</span> QUICK STARTS FOR THE DAY <span class="count" data-count="quick">4</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="quick">
+            <details class="activity">
+              <summary class="activity-title">Send Students on a Search <span class="tag">Inquiry</span></summary>
+              <div class="body">
+                Ask a question connected to your lesson and challenge students to find the answer using their browser. Craft prompts that require more than a copy‑and‑paste—questions that make them think about <em>how</em> they’re searching. Debrief how they searched and how they judged source reliability.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Cultivate Creativity With AI Images <span class="tag">Padlet</span></summary>
+              <div class="body">
+                In a Padlet board, have students generate and post an AI image about today’s topic—a vocabulary visual or an image that captures a mood. Classmates add captions to each other’s images.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Hook Curiosity With a Custom Song <span class="tag">Suno</span></summary>
+              <div class="body">
+                Create an AI‑generated tune that hints at today’s concept, question, or theme. Play it as students enter and ask them to listen for keywords or clues. Make it ahead of time—or create it live for a wow moment.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Check In with Emojis <span class="tag">Emoji</span></summary>
+              <div class="body">
+                Have students open a Google Doc/Slide/Note and choose an emoji that matches their feelings, confidence about yesterday’s topic, or a prediction for today. You get instant feedback at a glance.
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching activities here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="checks">
+      <details class="c2">
+        <summary class="section-head"><span class="icon">✅</span> CHECKS FOR UNDERSTANDING <span class="count" data-count="checks">4</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="checks">
+            <details class="activity">
+              <summary class="activity-title">Make a Mystery Mic Drop Moment <span class="tag">Padlet Voice</span></summary>
+              <div class="body">
+                Students type a one‑sentence summary into Padlet’s AI Voice tool. Turn on “Hide Author” for anonymity, then let classmates listen and vote with the five‑star reaction setting.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Spot the Lie <span class="tag">2 Truths &amp; a Lie</span></summary>
+              <div class="body">
+                Students post two true statements and one false one about the learning so far on a shared Padlet. Classmates like the post they think is the lie before authors reveal answers.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Plot a Timeline in Ten <span class="tag">Padlet Timeline</span></summary>
+              <div class="body">
+                Create a timeline board and have small groups map key events—history moments, process steps, or story scenes. Compare timelines between groups and discuss differences.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Drive Deeper Discussion <span class="tag">Wayground</span></summary>
+              <div class="body">
+                Use Wayground Presentations (formerly Quizizz) to upload slides and insert polls or word clouds. Responses appear instantly. Switch to a collaborative whiteboard in one click to extend discussion.
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching activities here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="collab">
+      <details class="c3">
+        <summary class="section-head"><span class="icon">💬</span> COLLABORATION &amp; DISCUSSION <span class="count" data-count="collab">4</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="collab">
+            <details class="activity">
+              <summary class="activity-title">Co‑Write Creative Stories <span class="tag">Padlet</span></summary>
+              <div class="body">
+                Use a Padlet set to columns. Post the opening and let students continue the story via comments or new posts. Add AI images for illustrations. You’ll end with a class‑built story.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Take Collaboration to the Next Level <span class="tag">Canva Whiteboard</span></summary>
+              <div class="body">
+                In Canva’s digital whiteboard, groups co‑create visuals like character maps, concept webs, or brainstorms. Tap the library of elements and fonts for expressive work.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Build a Collaborative Graffiti Wall <span class="tag">Padlet</span></summary>
+              <div class="body">
+                Start with a Padlet sandbox template as a graffiti wall for ideas, questions, and visuals. Use it as a warm‑up, a mid‑lesson check, or a closing reflection.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Create a Top 5 (or Flop 5) List <span class="tag">Ranking</span></summary>
+              <div class="body">
+                Students post top‑five lists (e.g., events in a story, ways to solve a problem, or biggest mistakes by a historical figure). Turn on voting so the class can like favorites.
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching activities here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="writing">
+      <details class="c4">
+        <summary class="section-head"><span class="icon">✍️</span> WRITING &amp; CREATION <span class="count" data-count="writing">6</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="writing">
+            <details class="activity">
+              <summary class="activity-title">Boost Student Brainstorming Visually <span class="tag">Freeform</span></summary>
+              <div class="body">
+                On iPad/Mac, Freeform needs no setup—just open and create. Students build sketchnotes or visual study guides with drawing tools, sticky notes, and shapes.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Animate Student Thinking <span class="tag">Keynote</span></summary>
+              <div class="body">
+                Use Keynote’s Line Draw to animate sketches that reveal thinking step‑by‑step—e.g., the water cycle, photosynthesis, or story plot development.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Expand Student Planning <span class="tag">Google Draw</span></summary>
+              <div class="body">
+                Google Draw offers a simple shared canvas for digital storyboards, mind maps, flowcharts, experiment steps, or novel event maps—editable in real time.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Provide Individualized Writing Feedback <span class="tag">MagicSchool AI</span></summary>
+              <div class="body">
+                Configure MagicSchool AI with clear prompts and rubrics to score writing and give specific, actionable suggestions. The quality comes from strong setup.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Design Animated Flashcards <span class="tag">Canva</span></summary>
+              <div class="body">
+                In Canva, create a slide per vocabulary word or concept, then add text, images, and animations using “Create an Animation.” Great for verbs in action or concept demos.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Quote Something Meaningful <span class="tag">Canva</span></summary>
+              <div class="body">
+                Search Canva for a “quote template.” Students pick a meaningful line from a text or lesson and pair it with visuals and typography reflecting the tone or message.
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching activities here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="sel">
+      <details class="c5">
+        <summary class="section-head"><span class="icon">💛</span> SEL SUPPORT <span class="count" data-count="sel">5</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="sel">
+            <details class="activity">
+              <summary class="activity-title">Break Tasks into Manageable Steps <span class="tag">Goblin.tools</span></summary>
+              <div class="body">
+                For PBL or big assignments, use Compiler to break large projects into smaller, trackable steps so students can manage time, reduce stress, and see progress.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Build a Gratitude Wall <span class="tag">Padlet</span></summary>
+              <div class="body">
+                Launch a classwide or private Padlet using Gratitude Wall templates. Students post short messages, images, or GIFs to show appreciation and notice the good.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Ask “How Are We Feeling?” <span class="tag">Canva</span></summary>
+              <div class="body">
+                Use Canva’s ready‑to‑use “How Are We Feeling” slides for daily emotional check‑ins—project to the class or share for private responses.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Quiet and Calm the Room <span class="tag">Classroom Zen</span></summary>
+              <div class="body">
+                Try Typing Zen when energy runs high. Students practice typing encouraging phrases—calming, skill‑building, and a mindful movement break.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Build Conversational Confidence <span class="tag">Magic School</span></summary>
+              <div class="body">
+                Use the Language Practice Room template for ELLs to explore conversation simulations, practice comprehension, and record spoken responses in a low‑stakes space.
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching activities here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="exit">
+      <details class="c6">
+        <summary class="section-head"><span class="icon">🎯</span> REFLECTION &amp; EXIT TICKETS <span class="count" data-count="exit">4</span></summary>
+        <div class="inner">
+          <div class="grid" data-group="exit">
+            <details class="activity">
+              <summary class="activity-title">Be the Bot <span class="tag">AI Literacy</span></summary>
+              <div class="body">
+                From Matt Miller (Ditch That Textbook): ask students to predict what an AI will answer to a lesson‑related question—identify vocabulary/concepts that should appear and what the AI might miss.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Set the Mood(board) <span class="tag">Canva</span></summary>
+              <div class="body">
+                In a shared Canva deck, give each student a slide to capture images, colors, and text that represent what they learned and how it felt—then gallery‑walk the deck.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Reverse‑Engineer an Exit Ticket <span class="tag">Padlet / LMS</span></summary>
+              <div class="body">
+                Instead of answering your question, students write their own and post it to a Padlet or LMS board. Turn the checkout into a quick peer‑learning moment with your probing replies.
+              </div>
+            </details>
+            <details class="activity">
+              <summary class="activity-title">Five‑Minute Reflection <span class="tag">Canva</span></summary>
+              <div class="body">
+                Have students grab a simple infographic template in Canva and fill it with key ideas, icons, and captions that capture the heart of the lesson in five minutes.
+              </div>
+            </details>
+          </div>
+          <p class="no-results">No matching activities here. Try a different keyword or clear the filter.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p class="small">Tip: Use the search box to filter across all sections (try “Padlet”, “timeline”, “Canva”, “feedback”, or “SEL”). Use the chips above to jump between sections.</p>
+    <p class="small">Source: <a href="https://www.edutopia.org/article/quick-ways-integrate-tech-classroom" target="_blank" rel="noopener">https://www.edutopia.org/article/quick-ways-integrate-tech-classroom</a></p>
+    <p class="small" style="text-align:center;">✨✍️ Created by Panagiotis Domvros, English and Drama Teacher✍️✨</p>
+  </footer>
+
+  <script>
+    const q = document.getElementById('q');
+    const resetBtn = document.getElementById('reset');
+    const expandAll = document.getElementById('expandAll');
+    const collapseAll = document.getElementById('collapseAll');
+
+    const sectionDetails = Array.from(document.querySelectorAll('section > details'));
+    const activityDetails = Array.from(document.querySelectorAll('details.activity'));
+
+    function setCounts(){
+      const groups = ['quick','checks','collab','writing','sel','exit'];
+      groups.forEach(g=>{
+        const grid = document.querySelector(`[data-group="${g}"]`);
+        const visible = Array.from(grid.querySelectorAll('details.activity')).filter(el=>el.style.display !== 'none').length;
+        const badge = document.querySelector(`[data-count="${g}"]`);
+        if(badge) badge.textContent = visible;
+        const empty = grid.parentElement.querySelector('.no-results');
+        if(empty) empty.style.display = visible ? 'none' : 'block';
+      })
+    }
+
+    function filterActivities(term){
+      const t = term.trim().toLowerCase();
+      // Ensure all parent sections open when filtering so results are visible
+      if(t){ sectionDetails.forEach(d=> d.open = true); }
+      activityDetails.forEach(d=>{
+        const txt = d.textContent.toLowerCase();
+        d.style.display = txt.includes(t) ? '' : 'none';
+      });
+      setCounts();
+    }
+
+    q.addEventListener('input', e=> filterActivities(e.target.value));
+
+    resetBtn.addEventListener('click', ()=>{
+      q.value = '';
+      activityDetails.forEach(d=> d.style.display='');
+      sectionDetails.forEach(d=> d.open = false); // Change: set all to false to keep it folded on reset
+      // sectionDetails.forEach((d,i)=> d.open = i===0); // Original: keep the first section open by default
+      setCounts();
+    });
+
+    expandAll.addEventListener('click', ()=> sectionDetails.forEach(d=> d.open = true));
+    collapseAll.addEventListener('click', ()=> sectionDetails.forEach(d=> d.open = false));
+
+    // Initialize counts
+    setCounts();
+  </script>
+</body>
+</html>

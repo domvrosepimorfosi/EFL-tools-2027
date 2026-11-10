@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" data-bdd-module="SAMR-tenses">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tense Game</title>
+    <style>
+        /* ==========================================================================
+           Main Setup & Background
+           ========================================================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #000; /* Solid black background */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* ==========================================================================
+           Content Container
+           ========================================================================== */
+        .container {
+            background-color: rgba(20, 20, 20, 0.75);
+            padding: 2em;
+            border-radius: 15px;
+            text-align: center;
+            width: 90%;
+            max-width: 900px; /* Wider container for the game */
+            border: 3px solid rgba(0, 183, 255, 0.9);
+            box-shadow: 0 0 35px rgba(0, 183, 255, 0.5);
+        }
+
+        /* ==========================================================================
+           Header, Logo & Title
+           ========================================================================== */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5em; /* Space between logo and title */
+            margin-bottom: 1em;
+        }
+
+        #logo {
+            width: 100px; /* Adjusted size */
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(0, 183, 255, 0.7));
+        }
+
+        /* NEW: Wrapper for title and subtitle */
+        .title-wrapper {
+            text-align: center;
+        }
+
+        h1 { 
+            font-size: 2.5em; 
+            color: #00B7FF;
+            margin: 0; /* Removed default margins */
+            font-weight: 600;
+            margin-bottom: 5px; /* Added space for subtitle */
+        }
+        
+        /* NEW: Subtitle style */
+        #subtitle {
+            font-size: 1.2rem; /* Small size font */
+            font-weight: 300;
+            color: #c0c0c0; /* Lighter gray */
+            margin: 0;
+            margin-top: -5px; /* Pull it up a bit */
+            letter-spacing: 0.5px;
+        }
+        
+        /* ==========================================================================
+           Toggle Switch
+           ========================================================================== */
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5em;
+            font-size: 0.9em;
+        }
+        .toggle-label {
+            font-weight: 300;
+            color: #fff;
+            transition: all 0.2s ease;
+        }
+        .toggle-label.active {
+            font-weight: 700;
+            color: #00B7FF;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #555;
+            transition: .4s;
+            border-radius: 28px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #00B7FF;
+        }
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        /* ==========================================================================
+           Typography (Instructions, Footer)
+           ========================================================================== */
+        p.instructions {
+            line-height: 1.5;
+            font-size: 1.1em;
+            min-height: 3em; /* Prevent layout shift */
+        }
+
+        footer { 
+            margin-top: 2em; 
+            font-size: 0.8em; 
+            opacity: 0.9; 
+            line-height: 1.4;
+            color: #fff; /* Ensure footer text is visible */
+        }
+
+        /* ==========================================================================
+           Game Layout (Board + Controls)
+           ========================================================================== */
+        #game-layout {
+            display: flex;
+            justify-content: space-between;
+            gap: 2em;
+            margin-top: 1em; /* Reduced margin */
+        }
+
+        #phrase-board {
+            flex-basis: 60%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        #game-controls {
+            flex-basis: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ==========================================================================
+           Phrase Boxes
+           ========================================================================== */
+        .phrase-box {
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px;
+        }
+        
+        .phrase-box:hover {
+            transform: scale(1.05);
+        }
+
+        .phrase-box.selected {
+            box-shadow: 0 0 15px #fff, 0 0 25px #00B7FF;
+            transform: scale(1.05);
+        }
+        
+        /* Colors from the image */
+        [data-color="pink"] { background-color: #f8c9d0; color: #222; }
+        [data-color="teal"] { background-color: #b2d8d8; color: #222; }
+        [data-color="yellow"] { background-color: #fdeca6; color: #222; }
+        [data-color="orange"] { background-color: #f9b69c; color: #222; }
+
+
+        /* ==========================================================================
+           The Interactive Dice Elements
+           ========================================================================== */
+        #dice-container { 
+            padding-bottom: 1em; /* Reduced padding */
+            display: flex;
+            justify-content: center;
+        }
+
+        #dice-face {
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            transition: transform 0.2s ease-out;
+        }
+
+        #dice-face:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        #dice-image {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ==========================================================================
+           Tense Key
+           ========================================================================== */
+        #tense-key {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 1.5em;
+        }
+
+        #tense-key h3 {
+            margin-top: 0;
+            color: #00B7FF;
+            border-bottom: 1px solid #00B7FF;
+            padding-bottom: 10px;
+        }
+
+        #tense-key ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        #tense-key li {
+            font-size: 1em;
+            margin-bottom: 8px;
+        }
+
+        #tense-key li strong {
+            display: inline-block;
+            width: 25px; /* Align numbers */
+            color: #fff;
+        }
+        
+        /* ==========================================================================
+           Result & Animation
+           ========================================================================== */
+        #roll-result { 
+            font-size: 1.3em;
+            font-weight: 500;
+            min-height: 1.5em;
+            line-height: 1.5;
+            color: #fff;
+        }
+        
+        #roll-result strong {
+            color: #00B7FF;
+            font-size: 1.1em;
+        }
+
+        .rolling {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+          10%, 90% { transform: translate3d(-1px, 0, 0); }
+          20%, 80% { transform: translate3d(2px, 0, 0); }
+          30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+          40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+        
+        /* ==========================================================================
+           Writing & Feedback Area
+           ========================================================================== */
+        #writing-task-area {
+            display: none; /* Hidden by default */
+            width: 100%;
+            margin-top: 1.5em;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1.5em;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        #sentence-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 2px solid #00B7FF;
+            background: #222;
+            color: #fff;
+            font-size: 1em;
+            box-sizing: border-box; /* Important */
+        }
+
+        #check-answer-btn {
+            background-color: #00B7FF;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+            font-size: 1em;
+        }
+
+        #check-answer-btn:hover {
+            background-color: #fff;
+            box-shadow: 0 0 10px #fff;
+        }
+        
+        #feedback-text {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: 500;
+            min-height: 1.5em;
+            line-height: 1.4;
+        }
+
+        .feedback-correct {
+            color: #50fa7b; /* Green */
+        }
+        
+        .feedback-prompt {
+            color: #f1fa8c; /* Yellow */
+        }
+
+        /* ==========================================================================
+           Responsive Layout
+           ========================================================================== */
+        @media (max-width: 800px) {
+            #game-layout {
+                flex-direction: column-reverse; /* Controls on top, board below */
+            }
+            #phrase-board {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 500px) {
+            header {
+                flex-direction: column; /* Stack logo and title on small screens */
+                gap: 0.5em;
+            }
+            #logo {
+                width: 80px; /* Smaller logo */
+            }
+            h1 { 
+                font-size: 2em; 
+            }
+        }
+
+    </style>
+<link rel="stylesheet" href="bdd-module-theme.css">
+</head>
+<body>
+<div class="library-banner" role="region" aria-label="Digital Teaching Library identity">
+  <div class="library-banner-inner">
+    <div class="library-eyebrow">Digital Teaching Library</div>
+    <div class="library-full-title">Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</div>
+  </div>
+</div>
+    <div class="container">
+        <header>
+            <img id="logo" src="../assets/pdhub-logo.png" alt="Panagiotis Domvros EFL Hub Logo">
+            <div class="title-wrapper">
+                <h1>The Tense Game</h1>
+                <h2 id="subtitle">Applying the SAMR model</h2>
+            </div>
+        </header>
+        <main>
+            
+            <div class="toggle-container">
+                <span class="toggle-label active" id="mode-label-aug">Augmentation</span>
+                <label class="switch">
+                    <input type="checkbox" id="mode-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label" id="mode-label-mod">Modification</span>
+            </div>
+
+            <p class="instructions" id="instructions">
+                1. Click a phrase from the board. <br> 2. Roll the die to get your tense!
+            </p>
+
+            <div id="game-layout">
+                
+                <div id="phrase-board">
+                    <div class="phrase-box" data-color="pink">take vitamins</div>
+                    <div class="phrase-box" data-color="teal">make a mistake</div>
+                    <div class="phrase-box" data-color="orange">do the dishes</div>
+                    <div class="phrase-box" data-color="yellow">have a good time</div>
+
+                    <div class="phrase-box" data-color="yellow">chill out</div>
+                    <div class="phrase-box" data-color="orange">fail an exam</div>
+                    <div class="phrase-box" data-color="teal">read a book</div> 
+                    <div class="phrase-box" data-color="orange">get off (a bus)</div>
+                    
+                    <div class="phrase-box" data-color="pink">give a hand (help)</div>
+                    <div class="phrase-box" data-color="yellow">take a risk</div>
+                    <div class="phrase-box" data-color="pink">take advantage of me</div>
+                    <div class="phrase-box" data-color="teal">take a break</div>
+                    
+                    <div class="phrase-box" data-color="teal">take out the rubbish</div>
+                    <div class="phrase-box" data-color="pink">get better</div>
+                    <div class="phrase-box" data-color="yellow">do your best</div>
+                    <div class="phrase-box" data-color="orange">take care of</div>
+                </div>
+
+                <div id="game-controls">
+                    <div id="dice-container">
+                        <div id="dice-face">
+                            <img id="dice-image" src="dice-question.png" alt="Click to roll the die">
+                        </div>
+                    </div>
+                    <p id="roll-result">Your fate awaits...</p>
+
+                    <div id="writing-task-area">
+                        <input type="text" id="sentence-input" placeholder="Type your sentence here...">
+                        <button id="check-answer-btn">Check Answer</button>
+                        <p id="feedback-text"></p>
+                    </div>
+
+                    <div id="tense-key">
+                        <h3>Tense Key</h3>
+                        <ul>
+                            <li><strong>[1]</strong> Simple Present</li>
+                            <li><strong>[2]</strong> Simple Past</li>
+                            <li><strong>[3]</strong> Past Perfect</li>
+                            <li><strong>[4]</strong> Present Perfect</li>
+                            <li><strong>[5]</strong> Present Continuous</li>
+                            <li><strong>[6]</strong> Past Continuous</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>✨✍️ Created by Panagiotis Domvros, English and Drama Teacher, All Rights Reserved ✍️✨</p>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- ALL ELEMENTS ---
+            const diceFace = document.getElementById('dice-face');
+            const diceImage = document.getElementById('dice-image');
+            const rollResult = document.getElementById('roll-result');
+            const instructions = document.getElementById('instructions');
+            const phraseBoxes = document.querySelectorAll('.phrase-box');
+            
+            // --- MODIFICATION ELEMENTS ---
+            const writingTaskArea = document.getElementById('writing-task-area');
+            const sentenceInput = document.getElementById('sentence-input');
+            const checkAnswerBtn = document.getElementById('check-answer-btn');
+            const feedbackText = document.getElementById('feedback-text');
+
+            // --- TOGGLE ELEMENTS ---
+            const modeToggle = document.getElementById('mode-toggle');
+            const modeLabelAug = document.getElementById('mode-label-aug');
+            const modeLabelMod = document.getElementById('mode-label-mod');
+
+            // --- STATE ---
+            let isRolling = false;
+            let selectedPhrase = null;
+            let currentTense = null;
+            let currentBaseVerb = null;
+            let isModificationMode = false; // Start in Augmentation mode
+            const initialInstructions = instructions.innerHTML;
+
+            /* --- IMAGE ASSETS --- */
+            const diceImages = [
+                'dice1.png', 'dice2.png', 'dice3.png',
+                'dice4.png', 'dice5.png', 'dice6.png'
+            ];
+            const defaultImage = 'dice-question.png';
+
+            // --- GAME DATA ---
+            const tenses = {
+                1: "Simple Present",
+                2: "Simple Past",
+                3: "Past Perfect",
+                4: "Present Perfect",
+                5: "Present Continuous",
+                6: "Past Continuous"
+            };
+
+            // --- FUNCTIONS ---
+
+            /**
+             * Handles switching between modes
+             */
+            const handleModeToggle = () => {
+                isModificationMode = modeToggle.checked;
+                
+                // Update labels
+                if (isModificationMode) {
+                    modeLabelMod.classList.add('active');
+                    modeLabelAug.classList.remove('active');
+                } else {
+                    modeLabelAug.classList.add('active');
+                    modeLabelMod.classList.remove('active');
+                }
+                
+                // Reset the game state
+                writingTaskArea.style.display = 'none';
+                feedbackText.innerHTML = "";
+                rollResult.innerHTML = "Your fate awaits...";
+                instructions.innerHTML = initialInstructions;
+                phraseBoxes.forEach(box => box.classList.remove('selected'));
+                selectedPhrase = null;
+                currentTense = null;
+                currentBaseVerb = null;
+                diceImage.src = defaultImage;
+            };
+
+            /**
+             * Handles clicking on a phrase box
+             */
+            const selectPhrase = (e) => {
+                // Hide writing area and clear feedback from previous turn
+                writingTaskArea.style.display = 'none';
+                feedbackText.innerHTML = "";
+                feedbackText.className = "";
+                rollResult.innerHTML = "Your fate awaits...";
+                diceImage.src = defaultImage; // Reset dice image
+                
+                // Clear state
+                currentTense = null;
+                currentBaseVerb = null;
+                
+                // Remove 'selected' from all boxes
+                phraseBoxes.forEach(box => box.classList.remove('selected'));
+                
+                // Add 'selected' to the clicked box
+                const clickedBox = e.currentTarget;
+                clickedBox.classList.add('selected');
+                
+                selectedPhrase = clickedBox.textContent;
+                
+                instructions.innerHTML = `Selected: "<strong>${selectedPhrase}</strong>"<br>Now, roll the die!`;
+            };
+
+            /**
+             * Handles the dice roll logic and animation
+             */
+            const rollTheDice = () => {
+                if (isRolling) return;
+
+                if (!selectedPhrase) {
+                    rollResult.innerHTML = "<strong>Please select a phrase first!</strong>";
+                    return;
+                }
+                
+                isRolling = true;
+                diceFace.classList.add('rolling');
+                diceImage.src = defaultImage;
+                rollResult.textContent = "Rolling...";
+
+                writingTaskArea.style.display = 'none';
+                feedbackText.innerHTML = "";
+
+                setTimeout(() => {
+                    const roll = Math.floor(Math.random() * 6); // 0-5
+                    const rollNumber = roll + 1; // 1-6
+                    
+                    currentTense = tenses[rollNumber];
+                    currentBaseVerb = selectedPhrase.split(' ')[0].toLowerCase();
+                    
+                    diceImage.src = diceImages[roll];
+                    
+                    // === THIS IS THE CORE LOGIC CHANGE ===
+                    if (isModificationMode) {
+                        // --- MODIFICATION MODE ---
+                        rollResult.innerHTML = `Rolled a <strong>${rollNumber}</strong>! Your tense is: <strong>${currentTense}</strong>`;
+                        instructions.innerHTML = `Now, <strong>write a sentence</strong> below using "<strong>${selectedPhrase}</strong>".`;
+                        sentenceInput.value = "";
+                        sentenceInput.placeholder = `e.g., "She ${currentBaseVerb}s..." or "They ${currentBaseVerb}..."`;
+                        writingTaskArea.style.display = 'block';
+                        sentenceInput.focus();
+                    } else {
+                        // --- AUGMENTATION MODE ---
+                        rollResult.innerHTML = `Rolled a <strong>${rollNumber}</strong>!<br>Your tense is: <strong>${currentTense}</strong>`;
+                        instructions.innerHTML = `Practice: "<strong>${selectedPhrase}</strong>" (${currentTense})<br>Pick a new phrase!`;
+                        phraseBoxes.forEach(box => box.classList.remove('selected'));
+                        selectedPhrase = null;
+                    }
+                    // ======================================
+                    
+                    diceFace.classList.remove('rolling');
+                    isRolling = false;
+                }, 600); // Animation delay
+            };
+            
+            /**
+             * Checks the user's written sentence
+             */
+            const checkAnswer = () => {
+                const userInput = sentenceInput.value.toLowerCase().trim();
+                const verb = currentBaseVerb;
+                
+                if (!userInput || !currentTense) return;
+
+                let isCorrect = false;
+                let feedback = "";
+                feedbackText.className = ""; // Clear old class
+
+                switch (currentTense) {
+                    case "Present Perfect":
+                        isCorrect = (userInput.includes('have ') || userInput.includes('has '));
+                        feedback = isCorrect ? "Great! You used 'have' or 'has'." : "Don't forget to use <strong>'have'</strong> or <strong>'has'</strong> for Present Perfect.";
+                        feedbackText.className = isCorrect ? 'feedback-correct' : 'feedback-prompt';
+                        break;
+                    case "Past Perfect":
+                        isCorrect = userInput.includes('had ');
+                        feedback = isCorrect ? "Excellent! You used 'had'." : "Remember to use <strong>'had'</strong> for Past Perfect.";
+                        feedbackText.className = isCorrect ? 'feedback-correct' : 'feedback-prompt';
+                        break;
+                    case "Present Continuous":
+                        isCorrect = (userInput.includes('is ') || userInput.includes('am ') || userInput.includes('are ')) && userInput.includes('ing');
+                        feedback = isCorrect ? "Awesome! You used 'is/am/are' and '-ing'." : "Make sure to use <strong>'is'</strong>, <strong>'am'</strong>, or <strong>'are'</strong> and add <strong>'-ing'</strong> to the verb.";
+                        feedbackText.className = isCorrect ? 'feedback-correct' : 'feedback-prompt';
+                        break;
+                    case "Past Continuous":
+                        isCorrect = (userInput.includes('was ') || userInput.includes('were ')) && userInput.includes('ing');
+                        feedback = isCorrect ? "Perfect! You used 'was/were' and '-ing'." : "Don't forget <strong>'was'</strong> or <strong>'were'</strong> and add <strong>'-ing'</strong> to the verb.";
+                        feedbackText.className = isCorrect ? 'feedback-correct' : 'feedback-prompt';
+                        break;
+                    case "Simple Past":
+                        feedback = `Check your sentence. Did you use the <strong>Simple Past</strong> form of "${verb}"? (e.g., "-ed" or an irregular form)`;
+                        feedbackText.className = 'feedback-prompt';
+                        break;
+                    case "Simple Present":
+                        feedback = `Check your sentence. Did you use the <strong>Simple Present</strong> form? (e.g., "${verb}" or "${verb}s")`;
+                        feedbackText.className = 'feedback-prompt';
+                        break;
+                    default:
+                        feedback = "Keep trying! Select a phrase and roll again.";
+                }
+
+                feedbackText.innerHTML = feedback;
+
+                // Reset for the next turn
+                selectedPhrase = null;
+                currentTense = null;
+                currentBaseVerb = null;
+                phraseBoxes.forEach(box => box.classList.remove('selected'));
+                instructions.innerHTML = "<strong>Good job!</strong><br>" + initialInstructions;
+            };
+
+            // --- EVENT LISTENERS ---
+            modeToggle.addEventListener('change', handleModeToggle);
+            diceFace.addEventListener('click', rollTheDice);
+            phraseBoxes.forEach(box => {
+                box.addEventListener('click', selectPhrase);
+            });
+            checkAnswerBtn.addEventListener('click', checkAnswer);
+            sentenceInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    checkAnswer();
+                }
+            });
+
+            // --- INITIALIZATION ---
+            diceImage.src = defaultImage; // Set default image on load
+
+        });
+    </script>
+</body>
+</html>

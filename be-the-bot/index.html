@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en" data-bdd-module="be-the-bot">
+<head>
+  <meta charset="UTF-8" />
+  <title>Be the Bot – Colour Blast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Jazzy, playful fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Lilita+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg1: #fff7ad;
+      --bg2: #ffa9f9;
+      --bg3: #9bfffb;
+      --bg4: #ffecd2;
+
+      --card-1: #ffffff;
+
+      --accent-pink: #ff4f9a;
+      --accent-purple: #8c5bff;
+      --accent-yellow: #ffb800;
+      --accent-cyan: #00d4ff;
+      --accent-lime: #2bdc71;
+
+      --text: #2b1b2f;
+      --text-soft: #4b4b4b;
+
+      --radius: 20px;
+      --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, var(--bg1), transparent 45%),
+        radial-gradient(circle at 100% 0%, var(--bg2), transparent 45%),
+        radial-gradient(circle at 0% 100%, var(--bg3), transparent 45%),
+        radial-gradient(circle at 100% 100%, var(--bg4), transparent 45%),
+        linear-gradient(135deg, #fffaf0, #ffe8ff);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -80px;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.4) 0, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.4) 0, transparent 50%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 22px 14px 40px;
+      position: relative;
+    }
+
+    /* Header */
+
+    header {
+      text-align: center;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    header::before {
+      content: "★";
+      position: absolute;
+      left: 6%;
+      top: 0;
+      font-size: 2rem;
+      color: var(--accent-yellow);
+      transform: rotate(-15deg);
+    }
+
+    header::after {
+      content: "★";
+      position: absolute;
+      right: 6%;
+      top: 10px;
+      font-size: 2.2rem;
+      color: var(--accent-cyan);
+      transform: rotate(18deg);
+    }
+
+    .lang-toggle {
+      position: absolute;
+      top: 6px;
+      right: 14px;
+      display: flex;
+      gap: 4px;
+      z-index: 2;
+    }
+
+    .lang-btn {
+      border-radius: 999px;
+      border: 2px solid #ff9ff3;
+      background: #ffffff;
+      padding: 2px 10px;
+      font-size: 0.78rem;
+      font-family: "Baloo 2", system-ui, sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--accent-purple);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.16s ease, filter 0.1s ease;
+    }
+
+    .lang-btn:hover {
+      filter: brightness(1.05);
+    }
+
+    .lang-btn.lang-active {
+      background: linear-gradient(135deg, #ff9ff3, #feca57);
+      color: #2b1b2f;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+    }
+
+    .header-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .header-logo {
+      width: 70px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    }
+
+    header h1 {
+      margin: 0;
+      font-family: "Lilita One", system-ui, sans-serif;
+      font-size: clamp(1.7rem, 2.4vw + 1.3rem, 2.4rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-purple);
+      text-shadow:
+        2px 2px 0 #ffffff,
+        4px 4px 0 rgba(0,0,0,0.16);
+      white-space: nowrap;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+
+    .source-note {
+      margin: 4px 0 0;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      opacity: 0.9;
+    }
+
+    /* Cards */
+
+    .card,
+    .roles-box {
+      border-radius: var(--radius);
+      padding: 13px 16px 16px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      background: var(--card-1);
+    }
+
+    .roles-box {
+      background: linear-gradient(135deg, #fff0f6, #fffbea);
+      border: 3px dashed #ffb4d3;
+      margin-bottom: 14px;
+    }
+
+    .roles-box::before {
+      content: "🎉";
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      font-size: 1.6rem;
+      opacity: 0.9;
+    }
+
+    .roles-box p {
+      margin: 4px 0;
+      font-size: 0.96rem;
+    }
+
+    .roles-box strong {
+      color: var(--accent-purple);
+    }
+
+    .roles-box span.emoji {
+      font-size: 1.25rem;
+      margin-right: 3px;
+    }
+
+    .card {
+      margin-bottom: 14px;
+      border: 3px solid #ffffff;
+    }
+
+    .card:nth-of-type(2) {
+      background: radial-gradient(circle at top left, #ffe6ff, #ffffff);
+      border-color: #ffbadb;
+    }
+
+    .card:nth-of-type(3) {
+      background: radial-gradient(circle at top right, #e5fffa, #ffffff);
+      border-color: #92ffd9;
+    }
+
+    .card:nth-of-type(4) {
+      background: radial-gradient(circle at bottom, #fff6e3, #ffffff);
+      border-color: #ffe09c;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.7), transparent);
+      top: -40px;
+      right: -30px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      color: var(--accent-pink);
+      margin-bottom: 3px;
+    }
+
+    h2 {
+      margin: 0 0 6px;
+      font-size: 1.15rem;
+      color: var(--accent-purple);
+      font-family: "Lilita One", system-ui, sans-serif;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    h2 span.emoji {
+      font-size: 1.25rem;
+    }
+
+    p.sub {
+      margin: 0 0 6px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    label {
+      display: block;
+      margin: 8px 0 3px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-purple);
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      border-radius: 14px;
+      border: 2px solid #ffd5f2;
+      background: #fffdfd;
+      padding: 8px 10px;
+      font-size: 0.94rem;
+      font-family: "Baloo 2", system-ui, sans-serif;
+      resize: vertical;
+      min-height: 40px;
+      outline: none;
+      transition: border 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, transform 0.05s ease;
+    }
+
+    textarea {
+      min-height: 70px;
+      max-height: 230px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #b49ab3;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent-cyan);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(0,212,255,0.25);
+      transform: translateY(-1px);
+    }
+
+    .small-hint {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    /* Buttons */
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      font-family: "Baloo 2", system-ui, sans-serif;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.16s ease, filter 0.1s ease;
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: none;
+      filter: brightness(0.98);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-yellow));
+      color: #2b1b2f;
+      box-shadow: 0 10px 24px rgba(255, 79, 154, 0.5);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--accent-yellow), var(--accent-pink));
+      box-shadow: 0 12px 28px rgba(255, 184, 0, 0.55);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #ffffff, #e7f7ff);
+      color: var(--accent-purple);
+      border: 2px solid var(--accent-cyan);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      margin-left: 6px;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #e7f7ff, #ffffff);
+    }
+
+    /* Board */
+
+    .board-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .board-header h2 {
+      margin-bottom: 0;
+    }
+
+    .board-header-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .board-list {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    .board-item {
+      border-radius: 16px;
+      padding: 8px 10px;
+      font-size: 0.88rem;
+      position: relative;
+      background: linear-gradient(135deg, #fffdf2, #ffe9ff);
+      border: 2px dashed #ffd3ea;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .board-item::before {
+      content: "✦";
+      position: absolute;
+      right: 8px;
+      top: 6px;
+      font-size: 1.2rem;
+      color: var(--accent-yellow);
+      opacity: 0.8;
+    }
+
+    .board-item h3 {
+      margin: 0 0 4px;
+      font-size: 0.96rem;
+      font-family: "Lilita One", system-ui, sans-serif;
+      color: var(--accent-purple);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .board-item span.badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-lime));
+      color: #1b263b;
+    }
+
+    .board-label {
+      font-weight: 700;
+      color: var(--text-soft);
+    }
+
+    .board-empty {
+      margin-top: 8px;
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      font-style: italic;
+    }
+
+    footer {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      opacity: 0.9;
+    }
+  </style>
+<link rel="stylesheet" href="bdd-module-theme.css">
+</head>
+<body>
+<div class="library-banner" role="region" aria-label="Digital Teaching Library identity">
+  <div class="library-banner-inner">
+    <div class="library-eyebrow">Digital Teaching Library</div>
+    <div class="library-full-title">Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</div>
+  </div>
+</div>
+  <div class="container">
+    <header>
+      <div class="lang-toggle">
+        <button id="langEnBtn" class="lang-btn lang-active">EN</button>
+        <button id="langElBtn" class="lang-btn">ΕΛ</button>
+      </div>
+
+      <div class="header-main">
+        <img id="headerLogo" src="../assets/pdhub-logo.png" alt="PD Hub Logo" class="header-logo">
+        <h1 data-i18n="title">Be the Bot</h1>
+      </div>
+
+      <p data-i18n="subtitle">
+        Two roles, one lesson question, many AI-style answers. 🎨🤖
+      </p>
+      <p class="source-note">
+        (Developed from an idea by Matt Miller in <em>Ditch That Textbook</em>)
+      </p>
+    </header>
+
+    <section class="roles-box">
+      <p>
+        <span class="emoji">🧑‍🎓</span>
+        <strong>Human</strong>:
+        <span data-i18n="rolesHuman">
+          asks a question about today’s lesson and types it into the box.
+        </span>
+      </p>
+      <p>
+        <span class="emoji">🤖</span>
+        <strong>Bot</strong>:
+        <span data-i18n="rolesBot">
+          answers like an AI chatbot. Use clear English and important words from the lesson.
+        </span>
+      </p>
+      <p style="margin-top:6px;" data-i18n="rolesWork">
+        Work in pairs or with your teacher. When you finish, save your work on the Class Board so everyone can see
+        different “bot” answers.
+      </p>
+    </section>
+
+    <!-- STEP 1 – HUMAN -->
+    <section class="card">
+      <span class="eyebrow" data-i18n="step1Eyebrow">Step 1 · Human</span>
+      <h2>
+        <span class="emoji">🧑‍🎓</span>
+        <span data-i18n="step1Title">Ask your question</span>
+      </h2>
+      <p class="sub" data-i18n="step1Sub">
+        Human: type a simple question about the lesson. Make it clear and easy to understand for an AI (and your classmates!).
+      </p>
+
+      <label for="teamInput" data-i18n="teamLabel">Pair / team name</label>
+      <input id="teamInput" type="text" placeholder="e.g. Team Rainbow – Eleni & Alex" />
+
+      <label for="questionInput" data-i18n="questionLabel">Lesson question</label>
+      <textarea id="questionInput"
+        placeholder="e.g. How do we use the present perfect to talk about life experiences?"></textarea>
+      <p class="small-hint" data-i18n="questionHint">
+        Your question can be about grammar, vocabulary, reading texts, history, science – anything from today’s lesson.
+      </p>
+    </section>
+
+    <!-- STEP 2 – BOT -->
+    <section class="card">
+      <span class="eyebrow" data-i18n="step2Eyebrow">Step 2 · Bot</span>
+      <h2>
+        <span class="emoji">🤖</span>
+        <span data-i18n="step2Title">Be the bot</span>
+      </h2>
+      <p class="sub" data-i18n="step2Sub">
+        Bot: answer like an AI chatbot. Use good English, full sentences and key words from the lesson.
+        Imagine you are an AI helper!
+      </p>
+
+      <label for="botAnswerInput" data-i18n="botAnswerLabel">Bot’s answer (AI-style)</label>
+      <textarea id="botAnswerInput"
+        placeholder="Write your answer here. Explain clearly, step by step, like a friendly AI teacher."></textarea>
+      <p class="small-hint" data-i18n="botHint">
+        Think: how would a good AI teacher explain this idea to one of your classmates?
+      </p>
+
+      <button id="saveToBoardBtn" class="btn-primary" data-i18n="saveButton">
+        💾 Save this pair to the Class Board
+      </button>
+      <button id="clearCurrentBtn" class="btn-secondary" data-i18n="clearCurrentButton">
+        🧹 Clear current fields
+      </button>
+    </section>
+
+    <!-- CLASS BOARD -->
+    <section class="card">
+      <div class="board-header">
+        <div>
+          <span class="eyebrow" data-i18n="boardEyebrow">Class board</span>
+          <h2>
+            <span class="emoji">📋</span>
+            <span data-i18n="boardTitle">All pairs’ questions & bot answers</span>
+          </h2>
+          <p class="sub" data-i18n="boardSub">
+            When many students work at the same time, save each pair here.
+            Read and compare different AI-style answers.
+          </p>
+        </div>
+        <div class="board-header-controls">
+          <button id="clearBoardBtn" class="btn-secondary" data-i18n="clearBoardButton">
+            🗑 Clear board
+          </button>
+        </div>
+      </div>
+
+      <div id="boardList" class="board-list"></div>
+      <p id="boardEmpty" class="board-empty" data-i18n="boardEmpty">
+        No answers yet. Ask one pair to be the first Human & Bot and then click “Save this pair to the Class Board”. 🌈
+      </p>
+    </section>
+
+    <footer data-i18n="footer">
+      ✨✍️ Created by Panagiotis Domvros, English and Drama Teacher✍️✨
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      // DOM elements
+      const teamInput = document.getElementById('teamInput');
+      const questionInput = document.getElementById('questionInput');
+      const botAnswerInput = document.getElementById('botAnswerInput');
+
+      const saveToBoardBtn = document.getElementById('saveToBoardBtn');
+      const clearCurrentBtn = document.getElementById('clearCurrentBtn');
+      const clearBoardBtn = document.getElementById('clearBoardBtn');
+
+      const boardList = document.getElementById('boardList');
+      const boardEmpty = document.getElementById('boardEmpty');
+
+      const langEnBtn = document.getElementById('langEnBtn');
+      const langElBtn = document.getElementById('langElBtn');
+      const headerLogo = document.getElementById('headerLogo');
+
+      const translations = {
+        en: {
+          title: 'Be the Bot',
+          subtitle: 'Two roles, one lesson question, many AI-style answers. 🎨🤖',
+          rolesHuman: 'asks a question about today’s lesson and types it into the box.',
+          rolesBot: 'answers like an AI chatbot. Use clear English and important words from the lesson.',
+          rolesWork: 'Work in pairs or with your teacher. When you finish, save your work on the Class Board so everyone can see different “bot” answers.',
+          step1Eyebrow: 'Step 1 · Human',
+          step1Title: 'Ask your question',
+          step1Sub: 'Human: type a simple question about the lesson. Make it clear and easy to understand for an AI (and your classmates!).',
+          teamLabel: 'Pair / team name',
+          questionLabel: 'Lesson question',
+          questionHint: 'Your question can be about grammar, vocabulary, reading texts, history, science – anything from today’s lesson.',
+          step2Eyebrow: 'Step 2 · Bot',
+          step2Title: 'Be the bot',
+          step2Sub: 'Bot: answer like an AI chatbot. Use good English, full sentences and key words from the lesson. Imagine you are an AI helper!',
+          botAnswerLabel: 'Bot’s answer (AI-style)',
+          botHint: 'Think: how would a good AI teacher explain this idea to one of your classmates?',
+          saveButton: '💾 Save this pair to the Class Board',
+          clearCurrentButton: '🧹 Clear current fields',
+          boardEyebrow: 'Class board',
+          boardTitle: 'All pairs’ questions & bot answers',
+          boardSub: 'When many students work at the same time, save each pair here. Read and compare different AI-style answers.',
+          clearBoardButton: '🗑 Clear board',
+          boardEmpty: 'No answers yet. Ask one pair to be the first Human & Bot and then click “Save this pair to the Class Board”. 🌈',
+          footer: '✨✍️ Created by Panagiotis Domvros, English and Drama Teacher✍️✨',
+          teamPlaceholder: 'e.g. Team Rainbow – Eleni & Alex',
+          questionPlaceholder: 'e.g. How do we use the present perfect to talk about life experiences?',
+          botAnswerPlaceholder: 'Write your answer here. Explain clearly, step by step, like a friendly AI teacher.',
+          boardQuestionLabel: 'Question:',
+          boardBotAnswerLabel: 'Bot answer:',
+          pairPrefix: 'Pair',
+          pairFallbackPrefix: 'Pair',
+          alertMissingFields: 'Please fill in at least: team name, question and bot answer.',
+          clearCurrentConfirm: 'Clear the current Human & Bot fields?',
+          clearBoardConfirm: 'Clear the entire Class Board?',
+          logoSrc: '../assets/pdhub-logo.png',
+          logoAlt: 'PD Hub Logo'
+        },
+        el: {
+          title: 'ΓΙΝΕ το Bot',
+          subtitle: 'Δύο ρόλοι, μία ερώτηση μαθήματος, πολλές απαντήσεις τύπου AI. 🎨🤖',
+          rolesHuman: 'κάνει μια ερώτηση για το σημερινό μάθημα και τη γράφει στο πλαίσιο.',
+          rolesBot: 'απαντά σαν chatbot τεχνητής νοημοσύνης. Χρησιμοποίησε καθαρά Ελληνικά και βασικό λεξιλόγιο του μαθήματος.',
+          rolesWork: 'Δούλεψε σε ζευγάρια ή με τον/την καθηγητή/τριά σου. Όταν τελειώσετε, σώστε τη δουλειά σας στον Πίνακα Τάξης για να δουν όλοι τις διαφορετικές απαντήσεις «bot».',
+          step1Eyebrow: 'Βήμα 1 · Άνθρωπος',
+          step1Title: 'Κάνε την ερώτηση',
+          step1Sub: 'Human: γράψε μια απλή ερώτηση για το μάθημα. Κάνε την καθαρή και εύκολη για να την καταλάβει ένα AI (και οι συμμαθητές σου!).',
+          teamLabel: 'Όνομα ζευγαριού / ομάδας',
+          questionLabel: 'Ερώτηση μαθήματος',
+          questionHint: 'Η ερώτηση μπορεί να αφορά γραμματική, λεξιλόγιο, κείμενα κατανόησης, ιστορία, φυσική – οτιδήποτε από το σημερινό μάθημα.',
+          step2Eyebrow: 'Βήμα 2 · Bot',
+          step2Title: 'Γίνε το bot',
+          step2Sub: 'Bot: απάντησε σαν chatbot τεχνητής νοημοσύνης. Χρησιμοποίησε σωστά Ελληνικά, ολόκληρες προτάσεις και βασικές λέξεις του μαθήματος. Φαντάσου ότι είσαι ένας βοηθός AI!',
+          botAnswerLabel: 'Απάντηση Bot (τύπου AI)',
+          botHint: 'Σκέψου: πώς θα εξηγούσε ένας καλός AI δάσκαλος αυτή την ιδέα σε έναν συμμαθητή σου;',
+          saveButton: '💾 Αποθήκευσε το ζευγάρι στον Πίνακα Τάξης',
+          clearCurrentButton: '🧹 Καθάρισε τα πεδία ζευγαριού',
+          boardEyebrow: 'Πίνακας τάξης',
+          boardTitle: 'Όλες οι ερωτήσεις και οι απαντήσεις των ζευγαριών',
+          boardSub: 'Όταν δουλεύουν πολλά ζευγάρια ταυτόχρονα, αποθηκεύστε εδώ κάθε ζευγάρι. Διαβάστε και συγκρίνετε τις διαφορετικές απαντήσεις τύπου AI.',
+          clearBoardButton: '🗑 Καθάρισε τον πίνακα',
+          boardEmpty: 'Δεν υπάρχουν ακόμη απαντήσεις. Ζήτησε από ένα ζευγάρι να γίνει το πρώτο Human & Bot και μετά πάτησε «Αποθήκευση στον Πίνακα Τάξης». 🌈',
+          footer: '✨✍️ Δημιουργία: Παναγιώτης Δόμβρος, Εκπαιδευτικός Αγγλικών-Θεατρολόγος✍️✨',
+          teamPlaceholder: 'π.χ. Ομάδα Ουράνιο Τόξο – Ελένη & Άλεξ',
+          questionPlaceholder: 'π.χ. Πώς χρησιμοποιούμε τον present perfect για εμπειρίες ζωής;',
+          botAnswerPlaceholder: 'Γράψε εδώ την απάντησή σου. Εξήγησε καθαρά, βήμα-βήμα, σαν φιλικός AI teacher.',
+          boardQuestionLabel: 'Ερώτηση:',
+          boardBotAnswerLabel: 'Απάντηση Bot:',
+          pairPrefix: 'Ζευγάρι',
+          pairFallbackPrefix: 'Ζευγάρι',
+          alertMissingFields: 'Συμπλήρωσε τουλάχιστον: όνομα ομάδας, ερώτηση και απάντηση Bot.',
+          clearCurrentConfirm: 'Να καθαρίσουν τα τωρινά πεδία Human & Bot;',
+          clearBoardConfirm: 'Να καθαρίσει όλος ο Πίνακας Τάξης;',
+          logoSrc: 'greek logo.png',
+          logoAlt: 'Λογότυπο PD Hub (Ελληνικά)'
+        }
+      };
+
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      let boardItems = [];
+      let currentLang = 'en';
+
+      function renderBoard() {
+        const t = translations[currentLang];
+        boardList.innerHTML = '';
+
+        if (!boardItems.length) {
+          boardEmpty.style.display = 'block';
+          return;
+        }
+
+        boardEmpty.style.display = 'none';
+
+        boardItems.forEach((item, index) => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'board-item';
+
+          const title = document.createElement('h3');
+          const teamText = item.team || (t.pairFallbackPrefix + ' ' + (index + 1));
+          title.innerHTML =
+            escapeHtml(teamText) +
+            '<span class="badge">' + t.pairPrefix + ' ' + (index + 1) + '</span>';
+          wrapper.appendChild(title);
+
+          const q = document.createElement('p');
+          q.innerHTML =
+            '<span class="board-label">' + t.boardQuestionLabel + '</span> ' +
+            escapeHtml(item.question || '—');
+          wrapper.appendChild(q);
+
+          const a = document.createElement('p');
+          a.innerHTML =
+            '<span class="board-label">' + t.boardBotAnswerLabel + '</span> ' +
+            escapeHtml(item.botAnswer || '—');
+          wrapper.appendChild(a);
+
+          boardList.appendChild(wrapper);
+        });
+      }
+
+      function applyTranslations() {
+        const t = translations[currentLang];
+
+        document.querySelector('[data-i18n="title"]').textContent = t.title;
+        document.querySelector('[data-i18n="subtitle"]').textContent = t.subtitle;
+
+        document.querySelector('[data-i18n="rolesHuman"]').textContent = t.rolesHuman;
+        document.querySelector('[data-i18n="rolesBot"]').textContent = t.rolesBot;
+        document.querySelector('[data-i18n="rolesWork"]').textContent = t.rolesWork;
+
+        document.querySelector('[data-i18n="step1Eyebrow"]').textContent = t.step1Eyebrow;
+        document.querySelector('[data-i18n="step1Title"]').textContent = t.step1Title;
+        document.querySelector('[data-i18n="step1Sub"]').textContent = t.step1Sub;
+        document.querySelector('[data-i18n="teamLabel"]').textContent = t.teamLabel;
+        document.querySelector('[data-i18n="questionLabel"]').textContent = t.questionLabel;
+        document.querySelector('[data-i18n="questionHint"]').textContent = t.questionHint;
+
+        document.querySelector('[data-i18n="step2Eyebrow"]').textContent = t.step2Eyebrow;
+        document.querySelector('[data-i18n="step2Title"]').textContent = t.step2Title;
+        document.querySelector('[data-i18n="step2Sub"]').textContent = t.step2Sub;
+        document.querySelector('[data-i18n="botAnswerLabel"]').textContent = t.botAnswerLabel;
+        document.querySelector('[data-i18n="botHint"]').textContent = t.botHint;
+
+        document.querySelector('[data-i18n="saveButton"]').textContent = t.saveButton;
+        document.querySelector('[data-i18n="clearCurrentButton"]').textContent = t.clearCurrentButton;
+
+        document.querySelector('[data-i18n="boardEyebrow"]').textContent = t.boardEyebrow;
+        document.querySelector('[data-i18n="boardTitle"]').textContent = t.boardTitle;
+        document.querySelector('[data-i18n="boardSub"]').textContent = t.boardSub;
+        document.querySelector('[data-i18n="clearBoardButton"]').textContent = t.clearBoardButton;
+        document.querySelector('[data-i18n="boardEmpty"]').textContent = t.boardEmpty;
+
+        document.querySelector('[data-i18n="footer"]').textContent = t.footer;
+
+        teamInput.placeholder = t.teamPlaceholder;
+        questionInput.placeholder = t.questionPlaceholder;
+        botAnswerInput.placeholder = t.botAnswerPlaceholder;
+
+        headerLogo.src = t.logoSrc;
+        headerLogo.alt = t.logoAlt;
+
+        // Toggle button styles
+        langEnBtn.classList.toggle('lang-active', currentLang === 'en');
+        langElBtn.classList.toggle('lang-active', currentLang === 'el');
+
+        renderBoard();
+      }
+
+      // Event listeners
+      saveToBoardBtn.addEventListener('click', () => {
+        const t = translations[currentLang];
+        const team = teamInput.value.trim();
+        const question = questionInput.value.trim();
+        const botAnswer = botAnswerInput.value.trim();
+
+        if (!team || !question || !botAnswer) {
+          alert(t.alertMissingFields);
+          return;
+        }
+
+        boardItems.push({ team, question, botAnswer });
+        renderBoard();
+
+        // Clear fields for the next pair
+        teamInput.value = '';
+        questionInput.value = '';
+        botAnswerInput.value = '';
+        questionInput.focus();
+      });
+
+      clearCurrentBtn.addEventListener('click', () => {
+        const t = translations[currentLang];
+        if (!confirm(t.clearCurrentConfirm)) return;
+        teamInput.value = '';
+        questionInput.value = '';
+        botAnswerInput.value = '';
+      });
+
+      clearBoardBtn.addEventListener('click', () => {
+        const t = translations[currentLang];
+        if (!confirm(t.clearBoardConfirm)) return;
+        boardItems = [];
+        renderBoard();
+      });
+
+      langEnBtn.addEventListener('click', () => {
+        currentLang = 'en';
+        applyTranslations();
+      });
+
+      langElBtn.addEventListener('click', () => {
+        currentLang = 'el';
+        applyTranslations();
+      });
+
+      // Initial render
+      applyTranslations();
+    })();
+  </script>
+</body>
+</html>
