@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Digital Teaching Library: pedagogical frameworks, interactive activities, classroom tools and reference guides for English teachers.">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Digital Teaching Library: pedagogical frameworks, interactive activities, classroom tools and reference guides for English teachers." name="description"/>
 <title>Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</title>
 <style>
 :root{--navy:#102e49;--teal:#147a85;--ink:#1b2936;--muted:#546474;--line:#dce4e8;--paper:#f7f9fa;--surface:#ffffff;--focus:#006cbe;}
@@ -69,119 +70,53 @@ footer{border-top:1px solid var(--line);background:white;color:var(--muted);font
 .start-panel-body .open-link:hover{color:var(--navy)}
 @media(max-width:790px){.start-grid{grid-template-columns:1fr}.start-panel summary{min-height:55px}.start-panel-body .qr-img{width:200px;height:200px}}
 </style>
+<style>
+/* Seminar pathway: two clear phases, retaining the 2027 visual identity. */
+.module-grid .module{position:relative}
+.external-caption{font-size:12px !important;color:var(--teal) !important;font-weight:650}
+.section-head h2{font-weight:760}
+#pedagogy .section-head, #ai-tools .section-head{border-bottom:2px solid var(--teal)}
+#resources .section-head{border-bottom:2px solid #b0c1c9}
+#bibliography .section-head{border-bottom:2px solid #b0c1c9}
+@media(min-width:681px){nav .nav-inner{gap:10px 22px}}
+</style>
+<style>nav .site-index-home{display:inline-flex;align-items:center;gap:6px;background:#102e49;border:1px solid #102e49;color:#fff;padding:8px 12px;border-radius:7px;min-height:39px}nav .site-index-home:hover{background:#147a85;color:#fff;text-decoration:none}nav .site-index-home svg{height:18px;width:18px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}nav .site-index-home:focus-visible{outline:3px solid #147a85;outline-offset:3px}</style>
+<link rel="stylesheet" href="site-home.css">
 </head>
 <body>
-<header class="topbar"><div class="top-inner">
-<img class="brand-mark" src="assets/pdhub-logo.png" alt="Digital Teaching Library logo">
+<header class="topbar" id="top"><div class="top-inner">
+<img alt="Digital Teaching Library logo" class="brand-mark" src="assets/pdhub-logo.png"/>
 <div><p class="eyebrow">Digital Teaching Library</p><h1>Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</h1></div>
 </div></header>
-<nav aria-label="Page sections"><div class="nav-inner">
-<a href="#start">Start presentation</a><a href="#modules">Learning modules</a><a href="#resources">Resources &amp; references</a><a href="#materials">Additional materials</a>
-</div></nav>
+<nav aria-label="Page sections"><div class="nav-inner"><a class="site-index-home" href="#top" aria-label="Home — return to the top of the teaching library"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"/></svg><span>Home</span></a><a href="#start">Start presentation</a><a href="#pedagogy">Part I · Technology with purpose</a><a href="#ai-tools">Part II · AI &amp; classroom tools</a><a href="#resources">Resources</a><a href="#bibliography">Bibliography</a></div></nav>
 <main>
-<div class="intro"><p>Pedagogical frameworks, teaching applications, interactive activities and practical guides. Choose a module or find a resource below.</p>
-<div class="search-wrap"><label for="find">Find a module or resource</label><input id="find" type="search" placeholder="Search by title or topic" autocomplete="off"></div>
+<div class="intro"><p>Explore pedagogical frameworks, lesson planning, AI literacy, classroom activities and practical teaching tools.</p>
+<div class="search-wrap"><label for="find">Find a module or resource</label><input autocomplete="off" id="find" placeholder="Search by title or topic" type="search"/></div>
 </div>
-<section id="start" class="filter-section" aria-labelledby="start-heading">
+
+<section aria-labelledby="start-heading" class="filter-section" id="start">
 <div class="section-head"><h2 id="start-heading">Let's start </h2><p class="section-note"></p></div>
 <div class="start-grid">
 <details class="start-panel" data-search="The Teacher Make-Up The Teacher Make-Up">
 <summary>The Teacher Make-Up</summary>
 <div class="start-panel-body">
-<a class="qr-link" href="https://domvrosepimorfosi.github.io/teachermakeup/?lng=en" target="_blank" rel="noopener noreferrer" aria-label="Open the activity – The Teacher Make-Up"><img class="qr-img" src="assets/teacher-make-up.png" width="205" height="205" alt="QR code for The Teacher Make-Up" loading="lazy"></a>
-<a class="open-link" href="https://domvrosepimorfosi.github.io/teachermakeup/?lng=en" target="_blank" rel="noopener noreferrer">Open the activity</a>
+<a aria-label="Open the activity – The Teacher Make-Up" class="qr-link" href="https://domvrosepimorfosi.github.io/teachermakeup/?lng=en" rel="noopener noreferrer" target="_blank"><img alt="QR code for The Teacher Make-Up" class="qr-img" height="205" loading="lazy" src="assets/teacher-make-up.png" width="205"/></a>
+<a class="open-link" href="https://domvrosepimorfosi.github.io/teachermakeup/?lng=en" rel="noopener noreferrer" target="_blank">Open the activity</a>
 </div></details>
-<details class="start-panel" data-search="Let&#x27;s do a little survey AnswerGarden Survey">
-<summary>Let&#x27;s do a little survey</summary>
+<details class="start-panel" data-search="Let's do a little survey AnswerGarden Survey">
+<summary>Let's do a little survey</summary>
 <div class="start-panel-body">
-<a class="qr-link" href="https://answergarden.ch/5256141" target="_blank" rel="noopener noreferrer" aria-label="Open the survey – Let&#x27;s do a little survey"><img class="qr-img" src="assets/answer-garden.png" width="205" height="205" alt="QR code for Let&#x27;s do a little survey" loading="lazy"></a>
-<a class="open-link" href="https://answergarden.ch/5256141" target="_blank" rel="noopener noreferrer">Open the survey</a>
+<a aria-label="Open the survey – Let's do a little survey" class="qr-link" href="https://answergarden.ch/5081475" rel="noopener noreferrer" target="_blank"><img alt="QR code for Let's do a little survey" class="qr-img" height="205" loading="lazy" src="assets/answer-garden.png" width="205"/></a>
+<a class="open-link" href="https://answergarden.ch/5081475" rel="noopener noreferrer" target="_blank">Open the survey</a>
 </div></details>
 <details class="start-panel" data-search="Presentation Materials Teaching Materials">
 <summary>Presentation Materials</summary>
 <div class="start-panel-body">
-<a class="qr-link" href="https://domvrosepimorfosi.github.io/bdd-dissemination/" target="_blank" rel="noopener noreferrer" aria-label="Open materials – Presentation Materials"><img class="qr-img" src="assets/presentation-materials.png" width="205" height="205" alt="QR code for Presentation Materials" loading="lazy"></a>
-<a class="open-link" href="https://domvrosepimorfosi.github.io/bdd-dissemination/" target="_blank" rel="noopener noreferrer">Open materials</a>
+<a aria-label="Open materials – Presentation Materials" class="qr-link" href="https://domvrosepimorfosi.github.io/bdd-dissemination/" rel="noopener noreferrer" target="_blank"><img alt="QR code for Presentation Materials" class="qr-img" height="205" loading="lazy" src="assets/presentation-materials.png" width="205"/></a>
+<a class="open-link" href="https://domvrosepimorfosi.github.io/bdd-dissemination/" rel="noopener noreferrer" target="_blank">Open materials</a>
 </div></details>
-</div></section>
-<section id="modules" class="filter-section" aria-labelledby="modules-heading"><div class="section-head"><h2 id="modules-heading">Learning modules</h2><p class="section-note">Direct access to the redesigned webpages</p></div>
-<div class="module-grid">
-<a class="module" data-search="01 Beyond the “Fun” Factor Evaluating when digital tools genuinely improve learning." href="beyond-the-funfactor/index.html">
-      <span class="module-number">01</span>
-      <span class="module-copy"><strong>Beyond the “Fun” Factor</strong><small>Evaluating when digital tools genuinely improve learning.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="02 From Chalkboards to Chatbots TPACK, SAMR, Bloom’s taxonomy and purposeful AI integration." href="Chalkboards-to-Chatbots/index.html">
-      <span class="module-number">02</span>
-      <span class="module-copy"><strong>From Chalkboards to Chatbots</strong><small>TPACK, SAMR, Bloom’s taxonomy and purposeful AI integration.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="03 From Sonnet to Social Feed A practical SAMR analysis using Sonnet 130." href="SAMR-analysis-sonnet130/index.html">
-      <span class="module-number">03</span>
-      <span class="module-copy"><strong>From Sonnet to Social Feed</strong><small>A practical SAMR analysis using Sonnet 130.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="04 Applying the SAMR Model: The Tense Game An interactive tense-based activity." href="SAMR-tenses/index.html">
-      <span class="module-number">04</span>
-      <span class="module-copy"><strong>Applying the SAMR Model: The Tense Game</strong><small>An interactive tense-based activity.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="05 ICT Lesson Planner Plan learning activities with technology chosen for a clear purpose." href="ICT-LessonPlanner/index.html">
-      <span class="module-number">05</span>
-      <span class="module-copy"><strong>ICT Lesson Planner</strong><small>Plan learning activities with technology chosen for a clear purpose.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="06 From Rote to Reality Using AI to support creative and communicative EFL tasks." href="Rote-to-Reality/index.html">
-      <span class="module-number">06</span>
-      <span class="module-copy"><strong>From Rote to Reality</strong><small>Using AI to support creative and communicative EFL tasks.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="07 AI Literacy &amp; Prompt Engineering Prompting, evaluation, responsible AI literacy and 15-minute practical prompt workshop." href="ai-literacy/index.html">
-      <span class="module-number">07</span>
-      <span class="module-copy"><strong>AI Literacy &amp; Prompt Engineering</strong><small>Prompting, evaluation, responsible AI literacy and a 15-minute hands-on workshop.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="08 Using MagicSchool Step-by-step guidance and practical classroom applications." href="using-magicschool/index.html">
-      <span class="module-number">08</span>
-      <span class="module-copy"><strong>Using MagicSchool</strong><small>Step-by-step guidance and practical classroom applications.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="09 Tech Integration Methods and examples for integrating technology into teaching." href="tech-integration/index.html">
-      <span class="module-number">09</span>
-      <span class="module-copy"><strong>Tech Integration</strong><small>Methods and examples for integrating technology into teaching.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a><a class="module" data-search="10 Be the Bot Interactive exploration of how an AI assistant responds." href="be-the-bot/index.html">
-      <span class="module-number">10</span>
-      <span class="module-copy"><strong>Be the Bot</strong><small>Interactive exploration of how an AI assistant responds.</small></span>
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-    </a>
-</div></section>
-<section id="resources" class="filter-section" aria-labelledby="resources-heading"><div class="section-head"><h2 id="resources-heading">Resources &amp; references</h2><p class="section-note">Existing pages open as direct links</p></div>
-<div class="resource-grid">
-<a class="resource" data-search="Using Gemini Storybook" href="https://domvrosepimorfosi.github.io/using-storybook/" target="_blank" rel="noopener noreferrer">
-       <span>Using Gemini Storybook</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="Tools by Category &amp; Level" href="https://domvrosepimorfosi.github.io/ict-tools-categorised/" target="_blank" rel="noopener noreferrer">
-       <span>Tools by Category &amp; Level</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="EFL Tools — A Suggested List" href="https://domvrosepimorfosi.github.io/EFLTools-Suggested-List/" target="_blank" rel="noopener noreferrer">
-       <span>EFL Tools — A Suggested List</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="Guide to Some Basic ICT Tools" href="https://domvrosepimorfosi.github.io/ict-tools-presentation/" target="_blank" rel="noopener noreferrer">
-       <span>Guide to Some Basic ICT Tools</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="Setting Up a Mizou Chatbot" href="https://domvrosepimorfosi.github.io/mizou-chatbot/" target="_blank" rel="noopener noreferrer">
-       <span>Setting Up a Mizou Chatbot</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="AI Ideation Race" href="https://domvrosepimorfosi.github.io/ai-ideation-race/" target="_blank" rel="noopener noreferrer">
-       <span>AI Ideation Race</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="Let Me Count the Ways" href="https://domvrosepimorfosi.github.io/sonnet-letmecount/" target="_blank" rel="noopener noreferrer">
-       <span>Let Me Count the Ways</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="AI Classroom Policy — A Guide" href="https://domvrosepimorfosi.github.io/AI-classroom-policy/" target="_blank" rel="noopener noreferrer">
-       <span>AI Classroom Policy — A Guide</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="Select Bibliography" href="https://domvrosepimorfosi.github.io/bridging-divide-bibliography/" target="_blank" rel="noopener noreferrer">
-       <span>Select Bibliography</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a>
-</div></section>
-<section id="materials" class="filter-section" aria-labelledby="materials-heading"><div class="section-head"><h2 id="materials-heading">Additional materials</h2><p class="section-note">Useful tools, introductory activities and materials</p></div>
-<div class="resource-grid">
-<a class="resource" data-search="Goblin Tools" href="https://goblin.tools/" target="_blank" rel="noopener noreferrer">
-       <span>Goblin Tools</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="Classroom Zen" href="https://classroomzen.com/" target="_blank" rel="noopener noreferrer">
-       <span>Classroom Zen</span><span class="link-side">External link <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a><a class="resource" data-search="The Goldilocks Tech Rule — Video" href="ICT-LessonPlanner/The%20Goldilocks%20Tech%20Rule.mp4">
-       <span>The Goldilocks Tech Rule — Video</span><span class="link-side">Video <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-    </a>
-</div></section>
-<p class="empty" id="empty" role="status" aria-live="polite">No matching modules or resources.</p>
-</main>
+</div></section><section aria-labelledby="pedagogy-heading" class="filter-section" id="pedagogy"><div class="section-head"><h2 id="pedagogy-heading">Part I · Technology with purpose</h2><p class="section-note">Digital pedagogy, lesson planning and the SAMR model.</p></div><div class="module-grid"><a class="module" data-search="01 Beyond the “Fun” Factor Start with learning value, not novelty. Evaluate what technology genuinely contributes." href="beyond-the-funfactor/index.html"><span class="module-number">01</span><span class="module-copy"><strong>Beyond the “Fun” Factor</strong><small>Start with learning value, not novelty. Evaluate what technology genuinely contributes.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="02 ICT Lesson Planner Turn pedagogical goals into a carefully planned ICT-supported lesson." href="ICT-LessonPlanner/index.html"><span class="module-number">02</span><span class="module-copy"><strong>ICT Lesson Planner</strong><small>Turn pedagogical goals into a carefully planned ICT-supported lesson.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="03 The Goldilocks Tech Rule Use just enough technology: watch the short video and reflect on fit." href="goldilocks-tech-rule/index.html"><span class="module-number">03</span><span class="module-copy"><strong>The Goldilocks Tech Rule</strong><small>Use just enough technology: watch the short video and reflect on fit.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="04 From Chalkboards to Chatbots Explore TPACK, SAMR, Bloom and depth of knowledge before choosing tools." href="Chalkboards-to-Chatbots/index.html"><span class="module-number">04</span><span class="module-copy"><strong>From Chalkboards to Chatbots</strong><small>Explore TPACK, SAMR, Bloom and depth of knowledge before choosing tools.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="05 SAMR Analysis — From Sonnet to Social Feed Analyse a real literature task through all four SAMR levels." href="SAMR-analysis-sonnet130/index.html"><span class="module-number">05</span><span class="module-copy"><strong>SAMR Analysis — From Sonnet to Social Feed</strong><small>Analyse a real literature task through all four SAMR levels.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="06 Applying the SAMR Model — The Tense Game Move from the model to an interactive language-teaching example." href="SAMR-tenses/index.html"><span class="module-number">06</span><span class="module-copy"><strong>Applying the SAMR Model — The Tense Game</strong><small>Move from the model to an interactive language-teaching example.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a></div></section><section aria-labelledby="ai-tools-heading" class="filter-section" id="ai-tools"><div class="section-head"><h2 id="ai-tools-heading">Part II · AI literacy &amp; classroom practice</h2><p class="section-note">AI-supported language learning, prompt design and classroom applications.</p></div><div class="module-grid"><a class="module" data-search="07 From Rote to Reality Use AI to generate creative, communicative EFL learning tasks." href="Rote-to-Reality/index.html"><span class="module-number">07</span><span class="module-copy"><strong>From Rote to Reality</strong><small>Use AI to generate creative, communicative EFL learning tasks.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="08 AI Literacy &amp; Prompt Engineering Build responsible AI literacy and practise designing and evaluating prompts." href="ai-literacy/index.html"><span class="module-number">08</span><span class="module-copy"><strong>AI Literacy &amp; Prompt Engineering</strong><small>Build responsible AI literacy and practise designing and evaluating prompts.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="09 Using MagicSchool Explore step-by-step practical classroom uses of MagicSchool." href="using-magicschool/index.html"><span class="module-number">09</span><span class="module-copy"><strong>Using MagicSchool</strong><small>Explore step-by-step practical classroom uses of MagicSchool.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="10 Tech Integration Apply concrete strategies for choosing and integrating digital tools." href="tech-integration/index.html"><span class="module-number">10</span><span class="module-copy"><strong>Tech Integration</strong><small>Apply concrete strategies for choosing and integrating digital tools.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="11 Goblin Tools Explore supportive tools for planning and breaking down complex tasks." href="https://goblin.tools/" rel="noopener noreferrer" target="_blank"><span class="module-number">11</span><span class="module-copy"><strong>Goblin Tools</strong><small>Explore supportive tools for planning and breaking down complex tasks.</small><small class="external-caption">Opens external website</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="12 Classroom Zen Explore a classroom-focused resource for calm and attention." href="https://classroomzen.com/" rel="noopener noreferrer" target="_blank"><span class="module-number">12</span><span class="module-copy"><strong>Classroom Zen</strong><small>Explore a classroom-focused resource for calm and attention.</small><small class="external-caption">Opens external website</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a><a class="module" data-search="13 Be the Bot Experience an interactive activity on how an AI assistant responds." href="be-the-bot/index.html"><span class="module-number">13</span><span class="module-copy"><strong>Be the Bot</strong><small>Experience an interactive activity on how an AI assistant responds.</small></span><svg aria-hidden="true" class="arrow" viewbox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"></path></svg></a></div></section><section aria-labelledby="resources-heading" class="filter-section" id="resources"><div class="section-head"><h2 id="resources-heading">Resources · Teaching library</h2><p class="section-note">Practical resources and teaching guides.</p></div><div class="resource-grid"><a class="resource" data-search="Using Gemini Storybook" href="https://domvrosepimorfosi.github.io/using-storybook/" rel="noopener noreferrer" target="_blank"><span>Using Gemini Storybook</span><span class="link-side"></span></a><a class="resource" data-search="Tools by Category &amp; Level" href="https://domvrosepimorfosi.github.io/ict-tools-categorised/" rel="noopener noreferrer" target="_blank"><span>Tools by Category &amp; Level</span><span class="link-side"></span></a><a class="resource" data-search="EFL Tools — A Suggested List" href="https://domvrosepimorfosi.github.io/EFLTools-Suggested-List/" rel="noopener noreferrer" target="_blank"><span>EFL Tools — A Suggested List</span><span class="link-side"></span></a><a class="resource" data-search="Guide to Some Basic ICT Tools" href="https://domvrosepimorfosi.github.io/ict-tools-presentation/" rel="noopener noreferrer" target="_blank"><span>Guide to Some Basic ICT Tools</span><span class="link-side"></span></a><a class="resource" data-search="Setting Up a Mizou Chatbot" href="https://domvrosepimorfosi.github.io/mizou-chatbot/" rel="noopener noreferrer" target="_blank"><span>Setting Up a Mizou Chatbot</span><span class="link-side"></span></a><a class="resource" data-search="AI Ideation Race" href="https://domvrosepimorfosi.github.io/ai-ideation-race/" rel="noopener noreferrer" target="_blank"><span>AI Ideation Race</span><span class="link-side"></span></a><a class="resource" data-search="Let Me Count the Ways" href="https://domvrosepimorfosi.github.io/sonnet-letmecount/" rel="noopener noreferrer" target="_blank"><span>Let Me Count the Ways</span><span class="link-side"></span></a><a class="resource" data-search="AI Classroom Policy — A Guide" href="https://domvrosepimorfosi.github.io/AI-classroom-policy/" rel="noopener noreferrer" target="_blank"><span>AI Classroom Policy — A Guide</span><span class="link-side"></span></a></div></section><section aria-labelledby="bibliography-heading" class="filter-section" id="bibliography"><div class="section-head"><h2 id="bibliography-heading">Select bibliography</h2><p class="section-note">Recommended reading and references.</p></div><div class="resource-grid"><a class="resource" data-search="Select Bibliography" href="https://domvrosepimorfosi.github.io/bridging-divide-bibliography/" rel="noopener noreferrer" target="_blank"><span>Select Bibliography</span><span class="link-side"></span></a></div></section><p aria-live="polite" class="empty" id="empty" role="status">No matching modules or resources.</p></main>
+<a class="site-home-floating" href="#top" aria-label="Home — return to the top of the main teaching library"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"/></svg><span>Home</span></a>
 <footer>Panagiotis Domvros, English and Drama Teacher, All Rights Reserved</footer>
 <script>
 const field=document.getElementById('find');
@@ -194,6 +129,5 @@ field.addEventListener('input',()=>{
  groups.forEach(g=>{g.hidden=![...g.querySelectorAll('[data-search]')].some(e=>!e.hidden);});
  document.getElementById('empty').style.display=visible?'none':'block';
 });
-</script>
-</body>
+</script></body>
 </html>

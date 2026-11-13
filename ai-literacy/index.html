@@ -127,13 +127,16 @@
         }
     </style>
 <link rel="stylesheet" href="bdd-module-theme.css">
-<link rel="stylesheet" href="prompt-workshop.css">
+<link rel="stylesheet" href="../site-home.css">
 </head>
 <body class="p-4 md:p-8">
 <div class="library-banner" role="region" aria-label="Digital Teaching Library identity">
   <div class="library-banner-inner">
-    <div class="library-eyebrow">Digital Teaching Library</div>
+    <div class="site-home-heading">
+<div class="library-eyebrow">Digital Teaching Library</div>
     <div class="library-full-title">Bridging the Digital Divide - Teacher Empowerment and the future of the English Teacher in the age of AI</div>
+</div>
+<a class="site-home-button" href="../index.html" aria-label="Home — return to the main teaching library"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"/></svg><span>Home</span></a>
   </div>
 </div>
 
@@ -150,7 +153,6 @@
                 Essential Skills for the Modern Student
             </p>
         </header>
-        <p class="pw-shortcut"><a href="#prompt-workshop">Explore the 15-minute teacher workshop · Interactive prompt builder ↓</a></p>
 
         <section class="mb-10">
             <h2 class="text-2xl md:text-3xl font-bold text-text-dark mb-4 border-b-2 pb-2 border-primary">
@@ -320,109 +322,6 @@
             </div>
         </section>
 
-        <!-- Fifteen-minute practical extension: Prompt Engineering in Action -->
-        <section id="prompt-workshop" class="pw-workshop" aria-labelledby="pw-title">
-          <div class="pw-kicker"><span>MODULE 07 · LIVE WORKSHOP</span><span>15 MINUTES</span></div>
-          <h2 id="pw-title">Prompt Engineering in Action</h2>
-          <p class="pw-subtitle">From vague requests to effective EFL activities</p>
-          <p class="pw-lead">A well-designed prompt does not simply produce a better AI answer. It helps teachers design a better <strong>learning experience</strong>.</p>
-          <nav class="pw-timeline" aria-label="Workshop sequence">
-            <a href="#pw-purpose"><b>02</b><span>Learning first</span></a>
-            <a href="#pw-building"><b>03</b><span>Six elements</span></a>
-            <a href="#pw-compare"><b>03</b><span>Compare prompts</span></a>
-            <a href="#pw-challenge"><b>05</b><span>Try it</span></a>
-            <a href="#pw-review"><b>02</b><span>Review &amp; refine</span></a>
-          </nav>
-          <div id="pw-purpose" class="pw-section">
-            <div class="pw-step"><span>01</span><small>2 MIN · PEDAGOGICAL START</small></div>
-            <h3>Are we prompting for answers—or for learning?</h3>
-            <p>An AI tool can generate ten grammar exercises in seconds. But is that automatically good teaching?</p>
-            <div class="pw-columns">
-              <div class="pw-card pw-weak"><h4>Tool-first thinking</h4><p>“What can ChatGPT create for my lesson?”</p><small>The focus is on producing an output.</small></div>
-              <div class="pw-card pw-strong"><h4>Learning-first thinking</h4><p>“What should my students learn, and how could AI help?”</p><small>The focus is on evidence of learning.</small></div>
-            </div>
-            <p class="pw-statement">The learning objective comes first. The AI prompt comes second.</p>
-            <p class="pw-facilitator"><strong>Ask participants:</strong> Have you ever received an impressive-looking AI worksheet that was pedagogically disappointing?</p>
-          </div>
-          <div id="pw-building" class="pw-section">
-            <div class="pw-step"><span>02</span><small>3 MIN · PRACTICAL FRAMEWORK</small></div>
-            <h3>The anatomy of an effective educational prompt</h3>
-            <p>Use these six elements as a flexible checklist, not a compulsory formula.</p>
-            <div class="pw-six">
-              <div><b>01 · ROLE</b><span>Who should the AI act as?</span></div>
-              <div><b>02 · TASK</b><span>What should it create?</span></div>
-              <div><b>03 · CONTEXT</b><span>For which learners and learning goal?</span></div>
-              <div><b>04 · FORMAT</b><span>How should the result be organised?</span></div>
-              <div><b>05 · CONSTRAINTS</b><span>What limits must it follow?</span></div>
-              <div><b>06 · EXAMPLE</b><span>What would a suitable model look like?</span></div>
-            </div>
-            <p class="pw-facilitator"><strong>For EFL:</strong> Relevant context often includes CEFR level, age, learning objective, classroom time and evidence of learning. A model item can illustrate the expected pattern (few-shot prompting).</p>
-          </div>
-          <div id="pw-compare" class="pw-section">
-            <div class="pw-step"><span>03</span><small>3 MIN · BEFORE &amp; AFTER</small></div>
-            <h3>One task, two very different prompts</h3>
-            <div class="pw-card pw-weak"><h4>Prompt A · Vague request</h4><p class="pw-quote">“Create a speaking activity for my English class.”</p><small>Level, purpose, duration and the learning evidence are unspecified.</small></div>
-            <div class="pw-card pw-strong pw-example">
-              <div class="pw-cardheading"><h4>Prompt B · Pedagogically informed</h4><button class="pw-copy" data-pw-copy="pw-model-prompt" type="button">Copy prompt</button></div>
-              <pre id="pw-model-prompt" class="pw-prompt">Act as an experienced EFL instructional designer.
-
-Create a 10-minute pair-speaking activity for A2 lower-secondary learners aged 13–15.
-
-Learning objective: Students will use “should” and “shouldn't” to give advice in realistic everyday situations.
-
-Provide:
-• Four short situation cards.
-• One model dialogue.
-• Optional sentence starters for learners needing support.
-• A three-point teacher observation checklist.
-
-Example card:
-“I always go to bed very late and feel tired at school. What should I do?”
-
-Use accessible A2 language. Leave the main advice responses for students to create themselves.
-
-Format your response as:
-1. Student activity cards
-2. Language support
-3. Teacher assessment checklist.</pre>
-            </div>
-            <p class="pw-facilitator"><strong>Discussion:</strong> Which part of the second prompt makes the greatest pedagogical difference? A longer prompt is not automatically better; a clearer learning purpose is.</p>
-          </div>
-          <div id="pw-challenge" class="pw-section">
-            <div class="pw-step"><span>04</span><small>5 MIN · HANDS-ON CHALLENGE</small></div>
-            <h3>Build your own EFL prompt</h3>
-            <p>Choose a learning objective and generate a classroom-ready prompt. The builder works locally; no AI account or API connection is required.</p>
-            <form id="pw-builder" class="pw-builder" autocomplete="off">
-              <div class="pw-form-grid">
-                <label for="pw-level">CEFR level <select id="pw-level" name="level"><option>A1</option><option selected>A2</option><option>B1</option><option>B2</option></select></label>
-                <label for="pw-skill">Language skill <select id="pw-skill" name="skill"><option selected>Speaking</option><option>Writing</option><option>Reading</option><option>Listening</option></select></label>
-                <label for="pw-goal">Learning objective <input id="pw-goal" name="goal" type="text" maxlength="250" value="Giving advice using should / shouldn't"></label>
-                <label for="pw-format">Activity format <select id="pw-format" name="format"><option selected>Role-play cards</option><option>Information-gap activity</option><option>Collaborative writing task</option><option>Problem-solving challenge</option></select></label>
-              </div>
-              <label class="pw-check"><input id="pw-support" type="checkbox" checked> Include optional support for mixed-ability learners</label>
-              <div class="pw-result-head"><label for="pw-output">Your generated prompt</label><button id="pw-copy-generated" class="pw-copy" type="button">Copy prompt</button></div>
-              <textarea id="pw-output" rows="10" readonly aria-describedby="pw-local-note"></textarea>
-              <p id="pw-local-note" class="pw-small">You can edit the learning objective above, then copy and paste this prompt into an AI tool. Do not enter student names or other personal data.</p>
-              <div class="pw-form-actions"><button id="pw-reset" class="pw-reset" type="reset">Reset example</button><span id="pw-copy-status" aria-live="polite" role="status"></span></div>
-            </form>
-            <div class="pw-challenge-steps">
-              <div><strong>2 min</strong><span>Build a prompt independently or with a partner.</span></div>
-              <div><strong>2 min</strong><span>Check clarity, communicative purpose and constraints.</span></div>
-              <div><strong>1 min</strong><span>Share one improvement with the group.</span></div>
-            </div>
-          </div>
-          <div id="pw-review" class="pw-section pw-last">
-            <div class="pw-step"><span>05</span><small>2 MIN · QUALITY CONTROL</small></div>
-            <h3>Never stop at the first answer</h3>
-            <div class="pw-flow" role="list"><span role="listitem">PROMPT</span><b aria-hidden="true">→</b><span role="listitem">REVIEW</span><b aria-hidden="true">→</b><span role="listitem">REFINE</span><b aria-hidden="true">→</b><span role="listitem">VERIFY</span></div>
-            <ul class="pw-list"><li>Is the language appropriate for the CEFR level?</li><li>Does the task promote meaningful communication?</li><li>Is the content accurate, inclusive and safe?</li><li>Will learners demonstrate their <em>own</em> understanding?</li></ul>
-            <div class="pw-card pw-refine"><div class="pw-cardheading"><h4>Try this follow-up prompt</h4><button class="pw-copy" type="button" data-pw-copy="pw-refine-prompt">Copy prompt</button></div>
-              <p id="pw-refine-prompt">Evaluate this activity as an experienced EFL teacher. Identify three pedagogical weaknesses, including any mismatch with the stated CEFR level or learning objective. Suggest specific improvements, but preserve the students’ responsibility for producing their own language.</p>
-            </div>
-            <p class="pw-statement">AI can help us work faster. Pedagogical judgment determines whether we teach better.</p>
-          </div>
-        </section>
-
         <section class="mb-10 pt-6">
             <h2 class="text-2xl md:text-3xl font-bold text-text-dark mb-4 border-b-2 pb-2 border-primary">
                 Why AI Literacy is Essential for Students
@@ -582,7 +481,7 @@ Format your response as:
         </footer>
 
     </div>
-<script src="prompt-workshop.js" defer></script>
 
+<a class="site-home-floating" href="../index.html" aria-label="Home — return to the main teaching library"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"/></svg><span>Home</span></a>
 </body>
 </html>
