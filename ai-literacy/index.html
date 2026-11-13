@@ -125,6 +125,53 @@
         .text-justify {
             text-align: justify;
         }
+
+/* AI Literacy teaching workshop: scoped styles; other modules untouched */
+#prompt-workshop {scroll-margin-top:1.4rem;}
+#prompt-workshop p,#prompt-workshop li {text-align:left;}
+#prompt-workshop .pw-section {padding:1.55rem 0 1.25rem;border-top:1px solid #dfe3ed;}
+#prompt-workshop .pw-number {display:inline-block;font:800 .76rem/1.1 Montserrat, sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#5448cc;margin-bottom:.55rem;}
+#prompt-workshop .pw-heading {font-family:'Playfair Display',serif;font-size:clamp(1.35rem,2.8vw,1.85rem);line-height:1.25;color:#2c3e50;font-weight:750;margin:0 0 .85rem;}
+#prompt-workshop .pw-lead {font-size:1rem;color:#435468;line-height:1.66;margin:0 0 1rem;}
+#prompt-workshop .pw-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin:1rem 0;}
+#prompt-workshop .pw-card {border:1px solid #dcdfee;border-radius:.85rem;padding:1.15rem;background:#fff;min-width:0;}
+#prompt-workshop .pw-card--quiet {border-top:5px solid #d19c35;background:#fffaf0;}
+#prompt-workshop .pw-card--active {border-top:5px solid #6c63ff;background:#f3f2ff;}
+#prompt-workshop .pw-card h4 {font:800 .86rem/1.45 Montserrat,sans-serif;letter-spacing:.03em;color:#3d3985;text-transform:uppercase;margin:0 0 .6rem;}
+#prompt-workshop .pw-card p {font-size:.94rem;line-height:1.63;margin:.35rem 0;color:#324252;}
+#prompt-workshop .pw-takeaway {margin-top:1rem;padding:.9rem 1rem;background:#ecebff;border-left:4px solid #6c63ff;border-radius:.4rem;color:#302a78;font-size:.95rem;font-weight:700;line-height:1.5;}
+#prompt-workshop .pw-parts {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin:1rem 0;}
+#prompt-workshop .pw-part {border:1px solid #dddff4;background:#fff;border-radius:.7rem;padding:1rem;}
+#prompt-workshop .pw-part strong {display:block;font-size:.88rem;color:#5448cc;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem;}
+#prompt-workshop .pw-part span {font-size:.88rem;color:#39495b;line-height:1.6;}
+#prompt-workshop .pw-prompt {white-space:pre-wrap;overflow-wrap:anywhere;font:400 .92rem/1.67 Montserrat,sans-serif;background:white;color:#243344;padding:1rem;border:1px solid #deddea;border-radius:.55rem;margin:.55rem 0;}
+#prompt-workshop .pw-steps {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin:1rem 0;}
+#prompt-workshop .pw-step {background:#f5f2ff;border:1px solid #ddd7fa;border-radius:.75rem;padding:1rem;}
+#prompt-workshop .pw-step strong {display:block;font-weight:800;color:#5546a9;font-size:1rem;}
+#prompt-workshop .pw-step span {display:block;font-weight:780;color:#243344;margin:.25rem 0;}
+#prompt-workshop .pw-step p {font-size:.88rem;line-height:1.6;color:#465365;margin:0;}
+#prompt-workshop .pw-app {border:1px solid #b8d9d5;background:#f2faf8;padding:1rem;border-radius:.9rem;margin:1.3rem 0;}
+#prompt-workshop .pw-app-header {display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.7rem;margin-bottom:1rem;}
+#prompt-workshop .pw-app-header strong {font-size:1.06rem;color:#0f5e58;}
+#prompt-workshop .pw-app-header p {font-size:.87rem;color:#435c5a;max-width:520px;margin:.4rem 0 0;}
+#prompt-workshop .pw-link {display:inline-block;background:#0e756b;color:#fff!important;border:1px solid #0e756b;border-radius:.55rem;font-size:.88rem;font-weight:800;padding:.65rem .95rem;text-decoration:none!important;line-height:1.3;}
+#prompt-workshop .pw-link:hover {background:#09544e;}
+#prompt-workshop .pw-iframe {display:block;width:100%;height:1320px;border:1px solid #cadbd9;border-radius:.7rem;background:white;}
+#prompt-workshop .pw-cycle {display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1rem 0;}
+#prompt-workshop .pw-cycle span {flex:1 1 100px;background:#edebff;border:1px solid #d1cefa;padding:.6rem;text-align:center;border-radius:.5rem;font-weight:800;color:#4b3eb0;font-size:.8rem;}
+#prompt-workshop .pw-cycle b {color:#776dc6;}
+#prompt-workshop .pw-checks {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;}
+#prompt-workshop .pw-checks p {background:#fff;border:1px solid #dfdfeb;border-radius:.7rem;padding:.85rem;margin:0;font-size:.87rem;line-height:1.6;}
+#prompt-workshop .pw-checks strong {display:block;color:#463aa2;font-size:.85rem;margin-bottom:.25rem;}
+#prompt-workshop .pw-minilink {color:#5448cc;text-decoration:underline;text-underline-offset:3px;font-weight:750;}
+@media(max-width:680px){
+  #prompt-workshop .pw-grid,#prompt-workshop .pw-parts,#prompt-workshop .pw-steps,#prompt-workshop .pw-checks{grid-template-columns:1fr;}
+  #prompt-workshop .pw-iframe{height:1100px;}
+  #prompt-workshop .pw-card,#prompt-workshop .pw-part{padding:.9rem;}
+  #prompt-workshop .pw-cycle{gap:.3rem;}
+  #prompt-workshop .pw-cycle b{display:none;}
+}
+
     </style>
 <link rel="stylesheet" href="bdd-module-theme.css">
 <link rel="stylesheet" href="../site-home.css">
@@ -152,6 +199,7 @@
             <p class="text-xl text-text-light text-center">
                 Essential Skills for the Modern Student
             </p>
+            <p class="text-center mt-4"><a class="pw-minilink" style="color:#5546b2;font-weight:700;text-decoration:underline" href="#prompt-workshop">Explore the EFL Prompt Workshop ↓</a></p>
         </header>
 
         <section class="mb-10">
@@ -321,6 +369,112 @@
 
             </div>
         </section>
+
+
+        <!-- Prompt Workshop: PowerPoint slides 50–54, followed by the existing AI-literacy material -->
+        <section id="prompt-workshop" class="mb-10 pt-6" aria-labelledby="pw-heading">
+          <h2 id="pw-heading" class="text-2xl md:text-3xl font-bold text-text-dark mb-3 border-b-2 pb-2 border-primary">EFL Prompt Workshop</h2>
+          <p class="pw-lead">From a learning objective to a purposeful AI-assisted activity: analyse, design, try, and evaluate a prompt.</p>
+
+          <div class="pw-section" aria-labelledby="pw-purpose-heading">
+            <span class="pw-number">01 · Pedagogical purpose</span>
+            <h3 class="pw-heading" id="pw-purpose-heading">Prompting for Answers—or for Learning?</h3>
+            <p class="pw-lead">An AI tool can generate ten grammar exercises in seconds. Is that automatically good teaching?</p>
+            <div class="pw-grid">
+              <div class="pw-card pw-card--quiet"><h4>Tool-first thinking</h4><p>“What can ChatGPT create for my lesson?”</p><p><strong>Focus:</strong> producing an output</p></div>
+              <div class="pw-card pw-card--active"><h4>Learning-first thinking</h4><p>“What should my students learn, and how could AI help?”</p><p><strong>Focus:</strong> evidence of learning</p></div>
+            </div>
+            <div class="pw-takeaway">Learning objective first. AI prompt second.</div>
+          </div>
+
+          <div class="pw-section" aria-labelledby="pw-anatomy-heading">
+            <span class="pw-number">02 · Prompt design</span>
+            <h3 class="pw-heading" id="pw-anatomy-heading">The Anatomy of an Effective Educational Prompt</h3>
+            <p class="pw-lead">Use a flexible checklist—not a rigid formula. For EFL, start with the learning objective.</p>
+            <div class="pw-parts">
+              <div class="pw-part"><strong>01 · Role</strong><span>Who should the AI act as?</span></div>
+              <div class="pw-part"><strong>02 · Task</strong><span>What should it create?</span></div>
+              <div class="pw-part"><strong>03 · Context</strong><span>For which learners and learning goal?</span></div>
+              <div class="pw-part"><strong>04 · Format</strong><span>How should the result be organised?</span></div>
+              <div class="pw-part"><strong>05 · Constraints</strong><span>What limits must it follow?</span></div>
+              <div class="pw-part"><strong>06 · Example</strong><span>What would a suitable model look like?</span></div>
+            </div>
+            <div class="pw-takeaway">CEFR level + objective + activity + format + constraints + a useful example.</div>
+          </div>
+
+          <div class="pw-section" aria-labelledby="pw-comparison-heading">
+            <span class="pw-number">03 · Compare and improve</span>
+            <h3 class="pw-heading" id="pw-comparison-heading">One Task, Two Very Different Prompts</h3>
+            <div class="pw-grid">
+              <div class="pw-card pw-card--quiet">
+                <h4>Prompt A · Vague</h4>
+                <p class="pw-prompt">“Create a speaking activity for my English class.”</p>
+                <p><strong>Unspecified:</strong> level, learning objective, duration, and evidence of learning.</p>
+              </div>
+              <div class="pw-card pw-card--active">
+                <h4>Prompt B · Pedagogically informed</h4>
+                <div class="pw-prompt">Act as an experienced EFL instructional designer.
+Create a 10-minute pair-speaking activity for A2 learners aged 13–15.
+Goal: use “should / shouldn’t” to give advice in everyday situations.
+Include four situation cards, one model dialogue, optional sentence starters, and a three-point observation checklist.
+Example: “I go to bed late and feel tired at school. What should I do?”
+Use accessible A2 language. Students must generate their own advice.
+Format: student cards · language support · teacher checklist.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pw-section" aria-labelledby="pw-challenge-heading">
+            <span class="pw-number">04 · Hands-on practice</span>
+            <h3 class="pw-heading" id="pw-challenge-heading">The 5-Minute Prompt Challenge</h3>
+            <p class="pw-lead">Choose an EFL objective. Design an activity rather than simply a worksheet.</p>
+            <div class="pw-steps">
+              <div class="pw-step"><strong>2 minutes</strong><span>Build</span><p>Choose CEFR level, skill, objective, task format, and necessary support.</p></div>
+              <div class="pw-step"><strong>2 minutes</strong><span>Check</span><p>In pairs, review clarity, communicative purpose, and constraints.</p></div>
+              <div class="pw-step"><strong>1 minute</strong><span>Share</span><p>Offer one specific change that could improve the prompt.</p></div>
+            </div>
+            <div class="pw-app" id="efl-prompt-builder">
+              <div class="pw-app-header">
+                <div><strong>Build Your Own EFL Prompt</strong><p>Create a classroom-ready prompt, copy or save it, then use the built-in Quality Control checklist to review the AI-generated activity.</p></div>
+                <a class="pw-link" href="EFL_Prompt_Builder_Quality_Control.html" target="_blank" rel="noopener">Open builder in a new tab ↗</a>
+              </div>
+              <iframe class="pw-iframe" id="efl-builder-frame" src="EFL_Prompt_Builder_Quality_Control.html" title="Interactive EFL Prompt Builder with Quality Control" loading="lazy"></iframe>
+              <p style="font-size:.82rem;color:#52636a;margin:.7rem 0 0">The builder also works as a separate local page. Its Quality Control section is part of the application.</p>
+            </div>
+          </div>
+
+          <div class="pw-section" aria-labelledby="pw-refine-heading">
+            <span class="pw-number">05 · Quality assurance</span>
+            <h3 class="pw-heading" id="pw-refine-heading">Never Stop at the First Answer</h3>
+            <div class="pw-cycle" aria-label="Quality control cycle"><span>PROMPT</span><b>→</b><span>REVIEW</span><b>→</b><span>REFINE</span><b>→</b><span>VERIFY</span></div>
+            <div class="pw-checks">
+              <p><strong>Level</strong>Is the language genuinely CEFR-appropriate?</p>
+              <p><strong>Purpose</strong>Does the task require meaningful communication?</p>
+              <p><strong>Accuracy</strong>Are content and examples accurate and safe?</p>
+              <p><strong>Agency</strong>Do students generate their own language?</p>
+            </div>
+            <div class="pw-card" style="margin-top:1rem"><h4>Refinement prompt</h4><p>“Find three pedagogical weaknesses. Improve the task without doing the learning for students.”</p></div>
+            <div class="pw-takeaway">AI helps us work faster. Pedagogical judgment determines whether we teach better.</div>
+          </div>
+        </section>
+        <script>
+          // Resize the locally hosted builder to its content when same-origin access is permitted.
+          (() => {
+            const frame = document.getElementById('efl-builder-frame');
+            if (!frame) return;
+            const fit = () => {
+              try {
+                const d = frame.contentDocument;
+                if (!d || !d.body) return;
+                const footer = d.querySelector('footer');
+                const contentHeight = footer ? footer.getBoundingClientRect().bottom + d.defaultView.scrollY : d.body.scrollHeight;
+                frame.style.height = Math.max(900, Math.ceil(contentHeight + 26)) + 'px';
+              } catch (_) { /* Embedded content remains scrollable if browser policy prevents access. */ }
+            };
+            frame.addEventListener('load', () => {fit(); setTimeout(fit, 200);});
+            window.addEventListener('resize', fit);
+          })();
+        </script>
 
         <section class="mb-10 pt-6">
             <h2 class="text-2xl md:text-3xl font-bold text-text-dark mb-4 border-b-2 pb-2 border-primary">
